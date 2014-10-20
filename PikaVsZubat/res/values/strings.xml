@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">PikaVsZubat</string>
+    <string name="title_textView">Pikachu vs Zubat Demo!</string>
+    <string name="start_Activity_Button">Click to start!</string>
+    
+    
+    <!-- Battle Activity stuff -->
+    <string name="title_activity_battle">BattleActivity</string>
+    <string name="fight_Button">Fight</string>
+    <string name="pokemon_Button">Pokemon</string>
+    <string name="items_Button">Items</string>
+    <string name="run_Button">Run</string>
+    
+    <!-- Ability buttons -->
+    <string name="ability_1_Button">Ability 1</string>
+    <string name="ability_2_Button">Ability 2</string>
+    <string name="ability_3_Button">Ability 3</string>
+    <string name="ability_4_Button">Ability 4</string>
+    
+    <!-- testing buttons -->
+    <string name="test_TextView">Button Test</string>
+
+</resources>

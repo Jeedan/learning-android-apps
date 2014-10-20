@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Nasa Daily Image</string>
+    <string name="test_imageTitle">Nasa image of the day</string>
+    <string name="test_imageDate">Sunday 12/10/2014</string>
+    <string name="test_imageDescription">On Oct. 9, 2014 at 04:25 UTC (12:25 a.m. EDT), 
+        the Moderate Resolution Imaging Spectroradiometer (MODIS) instrument aboard NASA\'s 
+        Aqua satellite captured this view of Super Typhoon Vongfong in the Philippine Sea </string>
+
+</resources>

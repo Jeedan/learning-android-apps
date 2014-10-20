@@ -1,0 +1,23 @@
+package com.jeedan.android.criminalintent;
+
+import java.util.ArrayList;
+
+import android.content.Context;
+
+public class CrimeLab {
+
+	private ArrayList<Crime> mCrimes = new ArrayList<Crime>();
+	private static CrimeLab sCrimeLab; // singleton
+	private Context mAppContext;
+	
+	private CrimeLab(Context appContext){
+		mAppContext = appContext;
+	}
+	
+	public static CrimeLab get(Context c){
+		if(sCrimeLab == null){
+			sCrimeLab = new CrimeLab(c.getApplicationContext());
+		}	
+		return sCrimeLab;
+	}
+}

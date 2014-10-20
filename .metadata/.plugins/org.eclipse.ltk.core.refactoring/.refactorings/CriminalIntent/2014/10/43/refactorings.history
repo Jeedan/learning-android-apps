@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Rename resource &apos;CriminalIntent/res/layout/activity_crime.xml&apos; to &apos;activity_fragment.xml&apos;" description="Rename resource &apos;activity_crime.xml&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="res/layout/activity_crime.xml" name="activity_fragment.xml" stamp="1413728402773" updateReferences="true"/>
+</session>
