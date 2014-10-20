@@ -1,0 +1,13 @@
+package com.jeedan.android.criminalintent;
+
+import android.content.Context;
+
+public class CrimeLab {
+	private static CrimeLab sCrimeLab;
+	private Context mAppContext;
+	
+	private CrimeLab(Context appContext){
+		
+	}
+
+}

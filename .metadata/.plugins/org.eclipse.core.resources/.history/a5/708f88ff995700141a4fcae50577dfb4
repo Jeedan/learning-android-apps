@@ -1,0 +1,8 @@
+package com.jeedan.android.criminalintent;
+
+import android.app.ListFragment;
+
+public class CrimeListFragment extends ListFragment {
+	
+
+}
