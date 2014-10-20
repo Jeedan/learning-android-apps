@@ -1,7 +1,0 @@
-package com.jeedan.android.criminalintent;
-
-import android.app.Activity;
-
-public class SimpleFragmentActivity extends Activity {
-
-}

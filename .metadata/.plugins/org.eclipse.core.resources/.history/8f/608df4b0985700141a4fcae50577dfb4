@@ -1,7 +1,0 @@
-package com.jeedan.android.criminalintent;
-
-public class CrimeLab {
-	private static CrimeLab sCrimeLab;
-	private Context mAppcontext;
-
-}
