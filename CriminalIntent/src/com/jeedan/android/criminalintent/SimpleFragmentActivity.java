@@ -1,11 +1,11 @@
 package com.jeedan.android.criminalintent;
 
-import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 
-public abstract class SimpleFragmentActivity extends Activity {
+public abstract class SimpleFragmentActivity extends FragmentActivity {
 	protected abstract Fragment createFragment();
 	
 	@Override
@@ -13,7 +13,7 @@ public abstract class SimpleFragmentActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fragment);
 		
-		FragmentManager fm = getFragmentManager();
+		FragmentManager fm = getSupportFragmentManager();
 		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 		
 		if(fragment == null){

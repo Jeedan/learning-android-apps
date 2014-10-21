@@ -1,7 +1,9 @@
 package com.jeedan.android.criminalintent;
 
-import android.app.Fragment;
+import java.util.UUID;
+
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -16,17 +18,29 @@ import android.widget.EditText;
 
 public class CrimeFragment extends Fragment {
 	private static final String TAG = "CrimeFragment";
+	public static final String EXTRA_CRIME_ID = "come.jeedan.android.criminalintent.crime_id";
 	
 	private Crime mCrime;
 	private EditText mTitleField;
 	private Button mDateButton;
 	private CheckBox mSolvedCheckBox;
 	
+	public static CrimeFragment newInstance(UUID crimeID){
+		Bundle args = new Bundle();
+		args.putSerializable(EXTRA_CRIME_ID, crimeID);
+		
+		CrimeFragment fragment = new CrimeFragment();
+		fragment.setArguments(args);
+		return fragment;
+	}
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		
-		mCrime = new Crime();
+		UUID crimeId = (UUID)getArguments().getSerializable(EXTRA_CRIME_ID);
+		
+		mCrime = CrimeLab.get(getActivity()).getCrime(crimeId);
 	}
 	
 	@Override
@@ -35,6 +49,7 @@ public class CrimeFragment extends Fragment {
 		Log.d(TAG, "called onCreateView()");
 		
 		mTitleField = (EditText)v.findViewById(R.id.crime_title);
+		mTitleField.setText(mCrime.getTitle());
 		mTitleField.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -61,6 +76,7 @@ public class CrimeFragment extends Fragment {
 		
 
 		mSolvedCheckBox = (CheckBox)v.findViewById(R.id.crime_solved);
+		mSolvedCheckBox.setChecked(mCrime.isSolved());
 		mSolvedCheckBox.setOnCheckedChangeListener(new OnCheckedChangeListener() {
 			
 			@Override
