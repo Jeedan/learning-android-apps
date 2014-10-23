@@ -1,9 +1,0 @@
-package com.jeedanandroidapps.quiz;
-
-public class TrueFalse {
-	private int mQuestion;
-	private boolean mTrueQuestion
-	public TrueFalse(){
-		
-	}
-}

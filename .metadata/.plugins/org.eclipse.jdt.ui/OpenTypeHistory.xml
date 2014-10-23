@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
 <typeInfo handle="=CriminalIntent/src&lt;com.jeedan.android.criminalintent{SimpleFragmentActivity.java[SimpleFragmentActivity" modifiers="1025" timestamp="1413882892737"/>
-<typeInfo handle="=CriminalIntent/C:\/Android SDK\/adt-bundle-windows-x86_64-20131030\/sdk\/platforms\/android-19\/android.jar&lt;android.app(Activity.class[Activity" modifiers="33" timestamp="1412881450525"/>
+<typeInfo handle="=CriminalIntent/C:\/Users\/Jeedan\/Documents\/GitHub\/Android Workspaces\/CriminalIntent\/libs\/android-support-v4.jar&lt;android.support.v4.app(FragmentActivity.class[FragmentActivity" modifiers="33" timestamp="1413548417546"/>
+<typeInfo handle="=CriminalIntent/C:\/Users\/Jeedan\/Documents\/GitHub\/Android Workspaces\/CriminalIntent\/libs\/android-support-v4.jar&lt;android.support.v4.app(Fragment.class[Fragment" modifiers="33" timestamp="1413548417546"/>
 </typeInfoHistroy>
