@@ -1,0 +1,13 @@
+package com.jeedan.android.tvshowtracker;
+
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+
+public class BaseFragmentActivity extends FragmentActivity {
+	
+	protected abstract Fragment createFragment();
+	
+	public BaseFragmentActivity(){
+		
+	}
+}

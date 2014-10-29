@@ -1,0 +1,12 @@
+package com.jeedan.android.tvshowtracker;
+
+public class TVShow {
+
+	private String mShowName;
+	private String mSeason;
+	private String mEpisodeTitle;
+	
+	public TVShow(){
+		
+	}
+}

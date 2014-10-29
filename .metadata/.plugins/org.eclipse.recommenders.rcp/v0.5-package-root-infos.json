@@ -8,6 +8,19 @@
       "qualifier": ""
     },
     "jarFileFingerprint": "efec67655f6db90757faa37201efcee2a9ec3507",
+    "jarFileModificationDate": "2014-10-11T15:35:42.621+03:00",
+    "location": "C:\\Users\\Jeedan\\Documents\\GitHub\\Android Workspaces\\NasaDailyImage\\libs\\android-support-v4.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "android-support-v4",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "efec67655f6db90757faa37201efcee2a9ec3507",
     "jarFileModificationDate": "2014-10-17T15:20:17.546+03:00",
     "location": "C:\\Users\\Jeedan\\Documents\\GitHub\\Android Workspaces\\CriminalIntent\\libs\\android-support-v4.jar",
     "javaRuntime": false
@@ -20,8 +33,8 @@
       "micro": -1,
       "qualifier": ""
     },
-    "jarFileFingerprint": "70c745f690a0cd833625d3492835dbd5e5c46aa2",
-    "jarFileModificationDate": "2014-10-23T10:53:07.857+03:00",
+    "jarFileFingerprint": "f09d4d046fdd85a34e26943349f7ef9e3954562a",
+    "jarFileModificationDate": "2014-10-29T13:37:55.200+02:00",
     "location": "C:\\Users\\Jeedan\\Documents\\GitHub\\Android Workspaces\\appcompat_v7\\bin\\appcompat_v7.jar",
     "javaRuntime": false
   },
@@ -36,6 +49,19 @@
     "jarFileFingerprint": "9d58c29f33a93f486da30401118a4e45a7f208cb",
     "jarFileModificationDate": "2014-10-09T22:04:10.525+03:00",
     "location": "C:\\Android SDK\\adt-bundle-windows-x86_64-20131030\\sdk\\platforms\\android-19\\android.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "android",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "5a0ffbfcbf497991d90727ba9c063bd1e5f2d218",
+    "jarFileModificationDate": "2014-10-23T23:09:56.162+03:00",
+    "location": "C:\\Android SDK\\adt-bundle-windows-x86_64-20131030\\sdk\\platforms\\android-21\\android.jar",
     "javaRuntime": false
   },
   {

@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+    
+    <TextView 
+        android:id="@+id/tv_Show_Name_Text_View"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:text="@string/tv_show_name"/>    
+    
+    <CheckBox android:id="@+id/tracked_tv_show_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:padding="4dp"
+        android:enabled="true"
+        android:focusable="false"  />    
+        
+	<TextView 
+        android:id="@+id/tv_Show_Season_Text_View"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        android:layout_below="@id/tv_Show_Name_Text_View"
+        android:text="@string/tv_show_season"/>
+	
+	<TextView 
+        android:id="@+id/tv_Show_Episode_Text_View"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        android:layout_below="@id/tv_Show_Name_Text_View"
+        android:layout_toEndOf="@id/tv_Show_Season_Text_View"
+        android:layout_toRightOf="@id/tv_Show_Season_Text_View"
+        android:text="@string/tv_show_episode_title"/>
+	
+</RelativeLayout>

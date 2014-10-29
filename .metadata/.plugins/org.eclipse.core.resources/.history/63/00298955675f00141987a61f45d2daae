@@ -1,0 +1,7 @@
+package com.jeedan.android.tvshowtracker;
+
+public class TVShow {
+	public TVShow(){
+		
+	}
+}

@@ -1,0 +1,36 @@
+package com.jeedan.android.tvshowtracker;
+
+public class TVShow {
+
+	private String mShowName;
+	private String mSeason;
+	private String mEpisodeTitle;
+	
+	public TVShow(String showName, String season, String episodeTitle){
+		
+	}
+
+	public String getShowName() {
+		return mShowName;
+	}
+
+	public void setShowName(String mShowName) {
+		this.mShowName = mShowName;
+	}
+
+	public String getSeason() {
+		return mSeason;
+	}
+
+	public void setSeason(String mSeason) {
+		this.mSeason = mSeason;
+	}
+
+	public String getEpisodeTitle() {
+		return mEpisodeTitle;
+	}
+
+	public void setEpisodeTitle(String mEpisodeTitle) {
+		this.mEpisodeTitle = mEpisodeTitle;
+	}
+}

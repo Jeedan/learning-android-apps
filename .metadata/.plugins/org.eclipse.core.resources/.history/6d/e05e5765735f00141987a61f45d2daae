@@ -1,0 +1,42 @@
+package com.jeedan.android.tvshowtracker;
+
+import java.util.ArrayList;
+
+public class TVSeason {
+	
+	private String mTitle;
+	private int mSeasonCount;
+	private ArrayList<TVEpisode> mEpisodes;
+	
+	public TVSeason(String title, int seasonCount,TVEpisode episodes){
+		mEpisodes = new ArrayList<TVEpisode>();		
+		mTitle = title;
+		mSeasonCount = seasonCount;
+		
+		mEpisodes.add(episodes)
+	}
+	
+	public String getTitle() {
+		return mTitle;
+	}
+
+	public void setTitle(String title) {
+		mTitle = title;
+	}
+
+	public int getSeasonCount() {
+		return mSeasonCount;
+	}
+
+	public void setSeasonCount(int seasonCount) {
+		mSeasonCount = seasonCount;
+	}
+
+	public ArrayList<TVEpisode> getEpisodes() {
+		return mEpisodes;
+	}
+
+	public void setEpisodes(ArrayList<TVEpisode> episodes) {
+		mEpisodes = episodes;
+	}
+}

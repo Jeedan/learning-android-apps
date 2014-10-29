@@ -23,6 +23,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.Toast;
 import android.widget.CompoundButton.OnCheckedChangeListener;
 import android.widget.EditText;
 
@@ -137,6 +138,15 @@ public class CrimeFragment extends Fragment {
 	}
 	
 	@Override
+	public void onPause(){
+		super.onPause();
+		CrimeLab.get(getActivity()).saveCrimes();
+
+		Toast.makeText(getActivity(),"crimes saved to file", Toast.LENGTH_SHORT)
+			.show();
+	}
+	
+	@Override
 	public void onActivityResult(int requestCode, int resultCode, Intent data){
 		if(resultCode != Activity.RESULT_OK) return;
 		if(requestCode == REQUEST_DATE){
@@ -147,6 +157,6 @@ public class CrimeFragment extends Fragment {
 	}
 	
 	private void updateDate(){
-		mDateButton.setText(mCrime.getFormatedDate());//getDate().toString());
+		mDateButton.setText(mCrime.getFormatedDate(mCrime.getDate()));//getDate().toString());
 	}
 }

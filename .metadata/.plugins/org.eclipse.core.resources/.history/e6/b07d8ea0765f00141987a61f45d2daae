@@ -1,0 +1,39 @@
+package com.jeedan.android.tvshowtracker;
+
+import java.util.ArrayList;
+
+import android.content.Context;
+
+public class ShowDatabase {
+	private static ShowDatabase sShowDatabase;
+	private Context mAppContext;
+	private ArrayList<TVShow> mTVShows;
+	
+	private ShowDatabase(Context context){
+		mAppContext = context;
+
+		mTVShows = new ArrayList<TVShow>();
+		
+		TVShow arrow = new TVShow("Arrow", "Season 3", "Episode 4");
+		TVShow flash = new TVShow("The Flash", "Season 1", "Episode 4");
+		TVShow constantine = new TVShow("Constantine", "Season 1", "Episode 2");
+		TVShow doctorWho = new TVShow("Doctor Who", "Season 8", "Episode 11");
+		
+		mTVShows.add(arrow);
+		mTVShows.add(flash);
+		mTVShows.add(constantine);
+		mTVShows.add(doctorWho);
+		
+		// load from JSON
+		// create a Serializer
+		// load from Serializer
+		
+	}
+	
+	public static ShowDatabase getInstance(Context context){
+		if(sShowDatabase == null){
+			sShowDatabase = new ShowDatabase(context.getApplicationContext());
+		}
+		return sShowDatabase;
+	}
+}

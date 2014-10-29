@@ -1,0 +1,18 @@
+package com.jeedan.android.tvshowtracker;
+
+import android.content.Context;
+
+public class ShowDatabase {
+	private static ShowDatabase sShowDatabase;
+	private Context mAppContext;
+	
+	private ShowDatabase(){
+		
+	}
+	
+	public static ShowDatabase getInstance(Context context){
+		
+		
+		return sShowDatabase;
+	}
+}

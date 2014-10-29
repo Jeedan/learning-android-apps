@@ -1,6 +1,9 @@
 package com.jeedan.android.criminalintent;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import android.annotation.TargetApi;
 import android.content.Intent;
@@ -30,29 +33,31 @@ public class CrimeListFragment extends ListFragment {
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
-		
+
 		setHasOptionsMenu(true);
 		
-		setRetainInstance(true);
-		mSubtitleVisible = true;
 		
 		getActivity().setTitle(R.string.crimes_title);
 		
+		
 		Log.d(TAG, "started onCreate()");
+		// get crimes
 		mCrimes = CrimeLab.get(getActivity()).getCrimes();
+		Log.e(TAG, mCrimes.toString());
 		
 		// set up the adapter to display list view
 		//ArrayAdapter<Crime> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mCrimes);
 		CrimeAdapter adapter = new CrimeAdapter(mCrimes);
-		
 		setListAdapter(adapter); // let the listfragment know that adapter will be the 1 we get from "getListAdapter()
+		setRetainInstance(true);
+		mSubtitleVisible = true;
 	}
 	@TargetApi(11)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
 		//View v = super.onCreateView(inflater, parent, savedInstanceState);
 		View v = inflater.inflate(R.layout.fragment_list_view_crimes, parent, false);
-		
+
 		if(getListAdapter().isEmpty()){
 			//v = inflater.inflate(R.layout.fragment_list_empty, parent, false);
 			mAddNewCrimeButton = (Button)v.findViewById(R.id.add_crime_button);
@@ -78,7 +83,12 @@ public class CrimeListFragment extends ListFragment {
 		super.onResume();
 		((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
 	}
-	
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
+    }
+    
 	@Override
 	public void onListItemClick(ListView l, View v, int position, long id){
 		Crime c = ((CrimeAdapter)getListAdapter()).getItem(position);
@@ -124,6 +134,7 @@ public class CrimeListFragment extends ListFragment {
 	private void addNewCrime(){
 		Crime crime = new Crime();
 		CrimeLab.get(getActivity()).addCrime(crime);	
+        ((CrimeAdapter)getListAdapter()).notifyDataSetChanged();
 		Intent i = new Intent(getActivity(), CrimePagerActivity.class);
 		i.putExtra(CrimeFragment.EXTRA_CRIME_ID, crime.getID());
 		startActivityForResult(i,0);
@@ -147,7 +158,10 @@ public class CrimeListFragment extends ListFragment {
 			titleTextView.setText(c.getTitle());
 
 			TextView dateTextView = (TextView)convertView.findViewById(R.id.crime_list_item_titleDateTextView);
-			dateTextView.setText(c.getFormatedDate());
+
+			DateFormat simpleFormat = new SimpleDateFormat("EEEE, MMM, dd, yyyy.", Locale.US);
+			String formmattedDate = simpleFormat.format(c.getDate());  
+			dateTextView.setText(formmattedDate);
 			
 			CheckBox solvedCheckBox = (CheckBox)convertView.findViewById(R.id.crime_list_item_solvedCheckBox);
 			solvedCheckBox.setChecked(c.isSolved());
@@ -155,3 +169,19 @@ public class CrimeListFragment extends ListFragment {
 		}
 	}
 }
+/*
+	private class MyAsyncTask extends AsyncTask<String, Void, String>{
+
+		@Override
+		protected String doInBackground(String... params) {
+			Log.e(TAG, "do in background??");
+			mCrimes = CrimeLab.get(getActivity()).getCrimes();
+			
+			return null;
+		}
+		
+		protected void onPostExecuting(String result){
+			Log.e(TAG, "Not sure what to do here: ");
+			
+		}
+	}*/

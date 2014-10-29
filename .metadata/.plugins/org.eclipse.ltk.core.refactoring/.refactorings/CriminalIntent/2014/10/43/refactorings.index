@@ -9,3 +9,7 @@
 1414058846048	Copy file
 1414060093257	Delete element
 1414060327725	Rename resource 'fragment_list_crimes.xml'
+1414080665898	Rename field 'mID'
+1414148166511	Copy file
+1414234152138	Rename method 'loadCrimesOLD'
+1414234172696	Rename method 'saveCrimesOLD'

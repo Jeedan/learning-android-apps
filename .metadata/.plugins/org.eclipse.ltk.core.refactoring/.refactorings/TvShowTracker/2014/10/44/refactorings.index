@@ -1,0 +1,5 @@
+1414583822632	Rename resource 'activity_tvshow_list.xml'
+1414584059490	Rename type 'TVShowListActivity'
+1414585320638	Rename type 'TvShowListAdapter'
+1414585367025	Rename type 'TvShowAdapter'
+1414594115266	Extracts string 'Tracking' into R.string.tracking
