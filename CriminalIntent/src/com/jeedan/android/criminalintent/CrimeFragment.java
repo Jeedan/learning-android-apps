@@ -1,6 +1,9 @@
 package com.jeedan.android.criminalintent;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Locale;
 import java.util.UUID;
 
 import android.annotation.TargetApi;
@@ -157,6 +160,8 @@ public class CrimeFragment extends Fragment {
 	}
 	
 	private void updateDate(){
-		mDateButton.setText(mCrime.getFormatedDate(mCrime.getDate()));//getDate().toString());
+		DateFormat simpleFormat = new SimpleDateFormat("EEEE, MMM, dd, yyyy.", Locale.US);
+		String formmattedDate = simpleFormat.format(mCrime.getDate());  
+		mDateButton.setText(formmattedDate);//getDate().toString());
 	}
 }

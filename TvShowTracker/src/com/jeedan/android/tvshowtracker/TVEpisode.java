@@ -2,7 +2,6 @@ package com.jeedan.android.tvshowtracker;
 
 public class TVEpisode {
 	private String mTitle;
-	private int mEpisodeCount;
 	
 	public TVEpisode(String title){
 		mTitle = title;

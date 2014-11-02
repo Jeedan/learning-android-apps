@@ -26,12 +26,12 @@ public class TVShowListFragment extends ListFragment {
 		super.onCreate(savedInstanceState);
 		
 		setHasOptionsMenu(true);
-		getActivity().setTitle(R.string.app_all_shows);
-		
+		getActivity().setTitle(R.string.app_all_episodes);
+
 		mTVShows = ShowDatabase.getInstance(getActivity()).getTVShows();
 
 		// set up the adapter to display list view
-		//ArrayAdapter<Crime> adapter = new ArrayAdapter(getActivity(), android.R.layout.simple_list_item_1, mCrimes);
+		//ArrayAdapter<TVShow> adapter = new ArrayAdapter(getActivity(), android.R.layout.list_item_tvshow, mTVShows);
 	    AllTvShowsAdapter adapter = new AllTvShowsAdapter(mTVShows);
 	    		
 	   setListAdapter(adapter);
@@ -105,20 +105,33 @@ public class TVShowListFragment extends ListFragment {
 			
 			TVShow show = getItem(position);
 			
-			TextView nameTextView = (TextView)convertView.findViewById(R.id.tv_Show_Name_Text_View);
+			// show name
+			TextView nameTextView = (TextView)convertView.findViewById(R.id.tv_show_name_text_view);
 			nameTextView.setText(show.getShowName());
 			
-			TextView seasonTextView = (TextView)convertView.findViewById(R.id.tv_Show_Season_Text_View);
-			seasonTextView.setText(show.getSeason());
+			// season and episode number
+			TextView seasonTextView = (TextView)convertView.findViewById(R.id.tv_show_season_text_view);
 			
-			TextView episodeTextView = (TextView)convertView.findViewById(R.id.tv_Show_Episode_Text_View);
-			episodeTextView.setText(show.getEpisodeTitle());
+			if(Integer.parseInt(show.getSeason()) < 10){
+				seasonTextView.setText("s0" + show.getSeason() + "e0" + show.getEpisodeNumber());
+			}
+			else{
+				seasonTextView.setText("s" + show.getSeason() + "e" + show.getEpisodeNumber());
+			}
 			
-
-			TextView trackingTextView = (TextView)convertView.findViewById(R.id.tracking_text_View);
+			// episode title
+			TextView episodeTextView = (TextView)convertView.findViewById(R.id.tv_show_episode_text_view);
+			episodeTextView.setText(" - " + show.getEpisodeTitle());
+			
+			// release date
+			TextView releaseDateTextView = (TextView)convertView.findViewById(R.id.show_release_date);
+			releaseDateTextView.setText(" - Aired on: " + show.getReleaseDate());
+			
+		//	TextView trackingTextView = (TextView)convertView.findViewById(R.id.tracking_text_View);
 			
 			CheckBox trackedCheckBox = (CheckBox)convertView.findViewById(R.id.tracked_tv_show_check_box);
 			trackedCheckBox.setChecked(show.isTracked());
+			
 			return convertView;
 		}
 	}

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" >
+
+    <TextView
+        android:id="@+id/tv_show_name_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:text="@string/tv_show_name"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <CheckBox
+        android:id="@+id/tracked_tv_show_check_box"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:enabled="false"
+        android:focusable="false"
+        android:padding="4dp" />
+
+    <TextView
+        android:id="@+id/tracking_text_View"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toLeftOf="@id/tracked_tv_show_check_box"
+        android:layout_toStartOf="@id/tracked_tv_show_check_box"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        android:text="@string/tracking_text_check_box" />
+
+    <TextView
+        android:id="@+id/tv_show_season_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_show_name_text_view"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        android:text="@string/tv_show_season" />
+
+    <TextView
+        android:id="@+id/tv_show_episode_number_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_show_name_text_view"
+        android:layout_toEndOf="@id/tv_show_season_text_view"
+        android:layout_toRightOf="@id/tv_show_season_text_view"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        android:text="@string/tv_show_episode_number" />
+
+    <TextView
+        android:id="@+id/tv_show_episode_text_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_show_name_text_view"
+        android:layout_toEndOf="@id/tv_show_episode_number_text_view"
+        android:layout_toRightOf="@id/tv_show_episode_number_text_view"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        android:text="@string/tv_show_episode_title" />
+
+    <TextView
+        android:id="@+id/show_release_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_show_name_text_view"
+        android:layout_toEndOf="@id/tv_show_episode_text_view"
+        android:layout_toRightOf="@id/tv_show_episode_text_view"
+        android:paddingLeft="4dp"
+        android:paddingRight="4dp"
+        android:paddingTop="4dp"
+        android:text="@string/tv_show_episode_title" />
+
+</RelativeLayout>

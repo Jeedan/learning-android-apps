@@ -1,7 +1,0 @@
-package com.jeedan.android.tvshowtracker;
-
-public class ShowDatabase {
-	private static ShowDatabase(){
-		
-	}
-}

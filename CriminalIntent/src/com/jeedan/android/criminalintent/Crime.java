@@ -20,9 +20,7 @@ public class Crime {
 	private String mTitle;
 	private Date mDate;
 	private boolean mSolved;
-
-	private String mFormatDate;
-
+	
 	DateFormat simpleFormat;
 	public Crime(){
 		// generate unique id
@@ -31,7 +29,6 @@ public class Crime {
 		
 		//impleFormat = DateFormat.getDateInstance();
 		simpleFormat = new SimpleDateFormat("EEEE, MMM, dd, yyyy.", Locale.US);
-		mFormatDate = simpleFormat.format(mDate);
 	}
 	
 	public Crime(JSONObject json) throws JSONException {
@@ -51,11 +48,6 @@ public class Crime {
 		json.put(JSON_DATE, mDate.getTime());
 		json.put(JSON_SOLVED, mSolved);
 		return json;
-	}
-	
-	public String getFormatedDate(Date date){
-		mFormatDate = simpleFormat.format(date);
-		return mFormatDate;
 	}
 	
 	public Date getDate() {
