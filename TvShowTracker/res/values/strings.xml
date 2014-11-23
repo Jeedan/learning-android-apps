@@ -3,6 +3,7 @@
 
     <string name="app_name">TvShowTracker</string>
     <string name="app_all_shows">All shows</string>
+    <string name="app_tracked_shows">My tracked shows</string>
     <string name="app_all_episodes">All Arrow episodes</string>
     <string name="app_calendar_title">Today\'s shows</string>
     <string name="action_settings">Settings</string>
@@ -16,7 +17,8 @@
     
     <string name="empty_list">There are no TV Shows in this list.</string>
     
-    
+    <string name="menu_tracked_shows_label">My Shows</string>
+    <string name="new_show">New Show</string>
     <string name="tracking_text_check_box">Tracking</string>
     
 </resources>

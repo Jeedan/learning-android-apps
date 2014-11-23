@@ -1,16 +1,11 @@
 package com.jeedan.android.tvshowtracker;
 
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import android.util.Log;
 
 public class TVShow {
-
-	private static final String TAG = "TVShow";
-	
 	// all show information
 	
 	// NEXT and LAST aired information
@@ -22,8 +17,10 @@ public class TVShow {
 	private static final String JSON_SHOW = "show";
 	private static final String JSON_EPGUIDE_NAME = "epguide_name";
 	private static final String JSON_IMDB_ID = "imdb_id";
+	private static final String JSON_TRACKING = "tracking";
 	
-	
+	JSONObject mEpisodeObject;
+	JSONObject mShowObject;
 	private String mImdbId;
 	private String mShowName;
 	private String mSeason;
@@ -32,12 +29,21 @@ public class TVShow {
 	private String mEpisodeTitle;
 	
 	private String mReleaseDate; // tells you when the episode airs
-	
+	private String mEpGuideName;
 //	private ArrayList<TVSeason> mSeasons;
 //	private ArrayList<TVSeason> mEpisodes;
 	
 	private boolean mTracked;
 	
+	public TVShow(){
+		mShowName = "Show Title";
+		mSeason = "1";
+		mEpisodeTitle = "Episode Title";
+		mEpisodeNumber = 1;
+		mReleaseDate = "Release Date";
+		mImdbId = "some imdbID";
+		mEpGuideName = "showTitle";
+	}
 	public TVShow(String showName, String season, String episodeTitle, int epNumber, String releaseDate, String imdbId){
 		mShowName = showName;
 		mSeason = season;
@@ -45,36 +51,21 @@ public class TVShow {
 		mEpisodeNumber = epNumber;
 		mReleaseDate = releaseDate;
 		mImdbId = imdbId;
-	}
-	
-	public void loadAll(JSONObject json) throws JSONException{
-		JSONArray arr = json.getJSONArray("1");
-		JSONObject sea = arr.getJSONObject(0);
-		String season = sea.getString(JSON_SEASON);
-		String release = sea.getString(JSON_RELEASE_DATE);
-		String title = sea.getString(JSON_TITLE);
-		int number = sea.getInt(JSON_NUMBER);
-
-		mSeason = season; // number of season
-		mReleaseDate = release; // release date / air date
-		mEpisodeTitle = title; // episode title
-		mEpisodeNumber = number; // episode number
-		
-		JSONObject show = sea.getJSONObject(JSON_SHOW);
-		mShowName = show.getString(JSON_TITLE); // show name
+		mEpGuideName = "showTitle";
 	}
 	
 	public TVShow(JSONObject json) throws JSONException{
-	//	JSONObject start = json.getJSONObject("1");
+		//JSONObject start = json.getJSONObject(JSON_EPISODE);
 		JSONObject episode = null;
 		String season = null ;
 		String release = null;
 		String title = null;
 		int number = 0;
-		String epGuideName = null;
 		JSONObject show = null;
 		
-		if(json.has(JSON_SEASON)){
+		if(json.has("error")){
+			return;
+		}else if(json.has(JSON_SEASON)){
 			season = json.getString(JSON_SEASON);
 			release = json.getString(JSON_RELEASE_DATE);
 			title = json.getString(JSON_TITLE);
@@ -88,22 +79,41 @@ public class TVShow {
 			number = episode.getInt(JSON_NUMBER);
 			show = episode.getJSONObject(JSON_SHOW);
 		}
-
+		mShowObject = show; // objects for saving
+		mEpisodeObject = episode; // objcets for saving
+		
 		mSeason = season; // number of season
 		mReleaseDate = release; // release date / air date
 		mEpisodeTitle = title; // episode title
 		mEpisodeNumber = number; // episode number
-		
+
+		mEpGuideName = show.getString(JSON_EPGUIDE_NAME);
 		mShowName = show.getString(JSON_TITLE);
-		epGuideName = show.getString(JSON_EPGUIDE_NAME);
 		mImdbId = show.getString(JSON_IMDB_ID);
-		Log.d(TAG, "epGuideName: " + epGuideName + " imdbId: " + mImdbId);
+		
+		if(json.has(JSON_TRACKING))
+			mTracked = json.getBoolean(JSON_TRACKING);
 	}
-		
+	
+	// save single episodes
 	public JSONObject toJSON() throws JSONException{
-		JSONObject json = new JSONObject();
-		
-		return json;
+
+		JSONObject episode = new JSONObject();
+		episode.put(JSON_EPISODE, mEpisodeObject);
+		episode.put(JSON_TRACKING, mTracked);
+		/*
+		JSONObject json = episode.getJSONObject(JSON_EPISODE);
+		episode.put(JSON_SEASON, mSeason);
+		episode.put(JSON_RELEASE_DATE, mReleaseDate);
+		episode.put(JSON_TITLE, mEpisodeTitle);
+		episode.put(JSON_NUMBER, mEpisodeNumber);
+		JSONObject show = new JSONObject();
+		show.put(JSON_SHOW, show);
+		show.put(JSON_EPGUIDE_NAME, mEpGuideName);
+		show.put(JSON_TITLE, mShowName);
+		show.put(JSON_IMDB_ID, mImdbId);
+		*/
+		return episode;
 	}
 	
 	public boolean isTracked() {
@@ -117,7 +127,12 @@ public class TVShow {
 	public String getShowName() {
 		return mShowName;
 	}
-
+	public String getEpGuideName() {
+		return mEpGuideName;
+	}
+	public void setEpGuideName(String epGuideName) {
+		mEpGuideName = epGuideName;
+	}
 	public void setShowName(String mShowName) {
 		this.mShowName = mShowName;
 	}

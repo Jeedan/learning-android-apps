@@ -30,6 +30,7 @@ public class CrimeListFragment extends ListFragment {
 	private boolean mSubtitleVisible;
 	
 	private Button mAddNewCrimeButton;
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
@@ -52,6 +53,7 @@ public class CrimeListFragment extends ListFragment {
 		setRetainInstance(true);
 		mSubtitleVisible = true;
 	}
+	
 	@TargetApi(11)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
