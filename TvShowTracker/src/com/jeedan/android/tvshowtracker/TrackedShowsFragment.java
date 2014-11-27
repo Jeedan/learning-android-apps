@@ -7,6 +7,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Locale;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -16,30 +17,34 @@ import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
 
+@SuppressLint("InflateParams")
 public class TrackedShowsFragment extends ListFragment {
 	
 
 	private static final String TAG = "TrackedShowsFragment";
 	
-	private ArrayList<TVShow> mTrackedShows;
+	private ArrayList<TVShow> mTrackedShows;	
+	private boolean mReturnedShows; // if we get shows back from searching, show a toast
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		
 		setHasOptionsMenu(true);
-		getActivity().setTitle(R.string.app_tracked_shows);
-		mTrackedShows = new ArrayList<TVShow>();
 		mTrackedShows = ShowDatabase.getInstance(getActivity()).getTrackedShows(); // set the list to null so we do not crash at the start
-
 		
-		fetchShowUpdate();
-		Log.d(TAG, "TVShows size: " + mTrackedShows.size());
+		if(!ShowDatabase.mHasLoadedTracked)
+			fetchShowUpdate();
+		
+		Log.d(TAG, "Tracked TVShows size: " + mTrackedShows.size());
 		
 		setRetainInstance(true);// retain this fragment upon rotation
 		setupAdapter();
@@ -48,8 +53,9 @@ public class TrackedShowsFragment extends ListFragment {
 	@TargetApi(11)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
-		View v = inflater.inflate(R.layout.fragment_alltvshowslist, parent, false);
-		
+		View v = inflater.inflate(R.layout.fragment_my_tv_show_list, parent, false);
+
+		((TrackedAdapter)getListAdapter()).notifyDataSetChanged();
 		return v; 
 	}
 	
@@ -57,7 +63,7 @@ public class TrackedShowsFragment extends ListFragment {
 	public void onPause(){
 		super.onPause();
 		ShowDatabase.getInstance(getActivity()).saveTrackedShows(mTrackedShows);
-		Toast.makeText(getActivity(), "saved shows to file", Toast.LENGTH_SHORT).show();
+		Toast.makeText(getActivity(), R.string.saved_to_file_toast, Toast.LENGTH_SHORT).show();
 	}
 	
 	@Override 
@@ -72,18 +78,45 @@ public class TrackedShowsFragment extends ListFragment {
     
 		((TrackedAdapter)getListAdapter()).notifyDataSetChanged();
     }
-    
+    @Override
+	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
+		super.onCreateOptionsMenu(menu, inflater);
+		// Inflate the menu; this adds items to the action bar if it is present.
+		inflater.inflate(R.menu.myshow_menu_items, menu);
+	}
+	
+	@TargetApi(11)
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		// Handle action bar item clicks here. The action bar will
+		// automatically handle clicks on the Home/Up button, so long
+		// as you specify a parent activity in AndroidManifest.xml.
+		switch(item.getItemId()){
+		case R.id.menu_item_search_shows:	
+			Intent i = new Intent(getActivity(), AllTvShowsActivity.class);
+			startActivity(i);
+			return true;
+		default:
+				return super.onOptionsItemSelected(item);
+				
+		}
+	}
+	
 	public void setupAdapter(){
 		if(getActivity() == null && getListView() == null)return;
 		if(mTrackedShows != null){
-			Log.d(TAG, "setupAdapter");
+			Log.d(TAG, "setupAdapter initialized");
 			TrackedAdapter adapter = new TrackedAdapter(mTrackedShows);
 	    	setListAdapter(adapter);
+
 		}else {
 			setListAdapter(null);
 			Log.d(TAG, "setupAdapter failed");
 		}
+
+		((TrackedAdapter)getListAdapter()).notifyDataSetChanged();
 	}
+	
 	private void compareDate(String airDate){
 		try {
 			Calendar today = Calendar.getInstance();
@@ -118,15 +151,6 @@ public class TrackedShowsFragment extends ListFragment {
 		new FetchShowInfo(getActivity()).execute();
 	}
 	
-	private ArrayList<TVShow> fetchEpisodeLatest(String showName){
-		return ShowDatabase.getInstance(getActivity()).fetchLastAired(showName);
-	}
-	
-	private TVShow fetchEpisode(String showName){
-
-		return ShowDatabase.getInstance(getActivity()).fetchLast(showName);
-	}
-	
 	private String createShowName(String showName){
 		String numbers = showName.replaceAll("[a-zA-Z]+", "");// replaces all letters with empty char
 		String str1 = showName.replaceAll("[0-9]+", "_"); // replaces all numbers with an _
@@ -152,12 +176,24 @@ public class TrackedShowsFragment extends ListFragment {
 			ArrayList<TVShow> fetchedShow =  new ArrayList<TVShow>();
 			for(int i = 0; i< mTrackedShows.size(); i++){
 				String showName = mTrackedShows.get(i).getShowName().replaceAll("\\s", "");
-				//mTrackedShows.get(i).setEpGuideName(showName);
-				TVShow ep = fetchEpisode(showName);
-				fetchedShow.add(ep);
+				if(showName.contains("The")){
 
+					String cutThe = showName.substring(3);
+					TVShow ep = new XMLSerializer().fetchItem(cutThe);
+					fetchedShow.add(ep);
+
+				}else 
+				{
+
+					TVShow ep = new XMLSerializer().fetchItem(showName);
+					fetchedShow.add(ep);
+
+				}
+				//TVShow ep = fetchEpisode(showName);	
 				Log.d(TAG, "showName: " + showName);
 			}
+			
+			mReturnedShows = fetchedShow.size() > 0;
 			
 			return fetchedShow;
 		}
@@ -174,7 +210,13 @@ public class TrackedShowsFragment extends ListFragment {
 			if(dialog.isShowing()) dialog.dismiss(); // close the dialog
 			
 			mTrackedShows = shows;
-			Toast.makeText(getActivity(), "fetched show information", Toast.LENGTH_SHORT).show();	
+			if(mReturnedShows)
+			{
+				Toast.makeText(getActivity(), R.string.fetched_info_toast, Toast.LENGTH_SHORT).show();	
+			}else 
+			{
+				Toast.makeText(getActivity(), R.string.error_fetched_toast, Toast.LENGTH_SHORT).show();	
+			}
 			setupAdapter();
 		}
 	}
@@ -199,15 +241,8 @@ public class TrackedShowsFragment extends ListFragment {
 			nameTextView.setText(show.getShowName());
 			
 			// season and episode number
-			TextView seasonTextView = (TextView)convertView.findViewById(R.id.tracked_show_season_text_view);
-			
-			if(Integer.parseInt(show.getSeason()) < 10){
-				seasonTextView.setText("s0" + show.getSeason() + "e0" + show.getEpisodeNumber());
-			}
-			else{
-				seasonTextView.setText("s" + show.getSeason() + "e" + show.getEpisodeNumber());
-			}
-			
+			TextView SeasonEpisodeTextView = (TextView)convertView.findViewById(R.id.tracked_show_season_text_view);
+			SeasonEpisodeTextView.setText(show.getSeason() + show.getEpisodeNumber());
 			// episode title
 			TextView episodeTextView = (TextView)convertView.findViewById(R.id.tracked_show_episode_text_view);
 			episodeTextView.setText(" - " + show.getEpisodeTitle());

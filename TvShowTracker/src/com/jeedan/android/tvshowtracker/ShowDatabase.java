@@ -11,18 +11,17 @@ import android.util.Log;
 
 public class ShowDatabase {
 	private static final String TAG = "ShowDatabase";
-	private static final String FILENAME = "arrow.json";  // use to store our tracking information allshows
-	private static final String FILENAME_ALLSHOWS = "allshowsTest.txt";  // use to store our tracking information allshows
 	private static final String FILENAME_SAVE_TRACKED = "myShows.json";  // use to store our tracking information allshows
-	private static final String FILENAME_ALLSHOWS_TRACKING = "allTrackingTVShows.json";  // use to store our tracking information allshows
 	
 	// these Strings will be changed to become user input instead
-	private static final String ENDPOINT = "http://epguides.frecar.no/show/";
+	private static final String EPGUIDE_URL = "http://epguides.frecar.no/show/";
+	private static final String TVRAGE_URL = "http://epguides.frecar.no/show/";
 	
-	private ArrayList<TVShow> mTVShows;
+	private ArrayList<TVShow> mTVShows;  // shows that are found by searching
 	private ArrayList<TVShow> mTrackedTVShows; // shows that are being tracked
-	private TVShowJSONSerializer mSerializer;
-	private TVShowJSONSerializer mTvShowSerializer;
+	private TVShowJSONSerializer mSerializer;  // save tracked shows
+	
+	public static boolean mHasLoadedTracked;
 	private static ShowDatabase sShowDatabase;
 	private Context mAppContext;
 
@@ -36,33 +35,90 @@ public class ShowDatabase {
 	private ShowDatabase(Context context){
 		mAppContext = context;
 		mSerializer = new TVShowJSONSerializer(mAppContext, FILENAME_SAVE_TRACKED);
-		mTvShowSerializer = new TVShowJSONSerializer(mAppContext, FILENAME_ALLSHOWS_TRACKING);
-
-		loadJSONShowsFromFile();
-
-		createTVSHOWbyHand();
+		
+		mTVShows = new ArrayList<TVShow>();
+	//	mTrackedTVShows = new ArrayList<TVShow>();
 		loadTrackedShowsFromFile();
-		// load from txt
-		//loadShowsFromTxtFile();
+	}
+
+	public void addShow(TVShow show){
+		mTVShows.add(show);
 	}
 	
-	public boolean saveTVShowListTrackingInfo(ArrayList<TVShow> shows){
-		Log.d(TAG, "size " + shows.size());
-		//Log.d(TAG, "testing " + shows.get(0).toJSON().toString());
-		try {
-			mTvShowSerializer.saveShowsToFile(shows);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}finally{
-			
+	public boolean containsShow(String name){
+		for(int i =0; i < mTrackedTVShows.size(); i++){
+			String trackedShowName = mTrackedTVShows.get(i).getShowName().replaceAll(" ", "_"); 
+			if(trackedShowName.equals(name)){
+				Log.d(TAG, "contains " + trackedShowName);
+				return true; // the show is in our arraylist
+			}
 		}
-		return true;
+		return false;
 	}
 	
+	public void addTrackedShows(TVShow show){
+		mTrackedTVShows.add(show);
+	}
+	
+	public void removeAllTrackedShows(ArrayList<TVShow> toRemove){
+		mTrackedTVShows.removeAll(toRemove);
+	}
+	
+	public void removeTrackedShows(TVShow show){
+		mTrackedTVShows.remove(show);
+	}
+	
+	public ArrayList<TVShow> getTrackedShows() {
+		return mTrackedTVShows;
+	}
+	public void setTrackedShows(ArrayList<TVShow> shows) {
+		mTrackedTVShows = shows;
+	}
+	public ArrayList<TVShow> getTVShows() {
+		return mTVShows;
+	}
+	
+	public void loadTrackedShowsFromFile(){
+		try{
+			// load here
+			mTrackedTVShows = mSerializer.loadShowsFromFile();
+			mHasLoadedTracked = true;
+		}
+		catch(Exception e){
+			// error here
+			mTrackedTVShows = new ArrayList<TVShow>();
+			mHasLoadedTracked = false;
+			Log.d(TAG, "Error loading from serializer loadTrackedShowsFromFile \n" + e);
+		}
+	}
+	
+	public void loadJSONShowsFromFile(){
+		try{
+
+			// load here
+		//	mTVShows = mTvShowSerializer.loadShowsFromFile();
+			mTVShows = new ArrayList<TVShow>();
+		}
+		catch(Exception e){
+			// error here
+			mTVShows = new ArrayList<TVShow>();
+			Log.d(TAG, "Error loading from serializer loadJSONShowsFromFile \n" + e);
+		}
+	}
+	
+	public void loadShowsFromTxtFile(){
+		try{
+			// load here
+			mTVShows = mSerializer.loadAllTVShowsFromFile();
+		}
+		catch(Exception e){
+			// error here
+			mTVShows = new ArrayList<TVShow>();
+			Log.d(TAG, "Error loading from serializer \n" + e);
+		}
+	}
+
+	// save all tracked shows to json file
 	public boolean saveTrackedShows(ArrayList<TVShow> shows){
 		//TODO
 		Log.d(TAG, "size " + shows.size());
@@ -84,7 +140,7 @@ public class ShowDatabase {
 	public ArrayList<TVShow> fetchAllShowEpisodes(String showName){
 		try{
 			// load here
-			String url = ENDPOINT + showName;
+			String url = EPGUIDE_URL + showName;
 			Log.d(TAG, url);
 			mTVShows = mSerializer.fetchShowAllEpisodes(url);
 		}
@@ -100,14 +156,14 @@ public class ShowDatabase {
 		TVShow ep = null;
 		try{
 			// load here
-			String url = ENDPOINT + showName + "/last/";
+			String url = EPGUIDE_URL + showName + "/last/";
 			Log.d(TAG, url);
 			
 			ep = mSerializer.fetchEpisode(url);
 		}
 		catch(Exception e){
 			// error here
-			ep = new TVShow("Show not found, verify spelling by visiting epguides.com show database", "1", "title", 0, "date", "imdb");
+			ep = new TVShow("Show not found, verify spelling by visiting epguides.com show database", "1", "title", "0", "date");
 			Log.d(TAG, "Error loading from serializer \n" + e);
 		}
 		return ep;
@@ -118,7 +174,7 @@ public class ShowDatabase {
 		ArrayList<TVShow> lastAiredEpisodes = new ArrayList<TVShow>();
 		try{
 			// load here
-			String url = ENDPOINT + showName + "/last/";
+			String url = EPGUIDE_URL + showName + "/last/";
 			Log.d(TAG, url);
 			lastAiredEpisodes = mSerializer.fetchLastAiredEpisode(url);
 		}
@@ -134,67 +190,14 @@ public class ShowDatabase {
 		mTVShows = new ArrayList<TVShow>();
 		
 		// TVShow arrow = new TVShow("Arrow", 3, 50);
-		TVShow personOfInterest = new TVShow("Person of Interest", "1" , "Title ",0 , "Release date", "imdbID");
-		TVShow flash =  new TVShow("The Flash 2014", "1", "Title ", 0, "Release date", "imdbID");
-		TVShow constantine =  new TVShow("Constantine", "1", "Title ", 0, "Release date", "imdbID");
-		TVShow doctorWho =  new TVShow("Doctor Who 2005", "1", "Title ", 0, "Release date", "imdbID");
+		TVShow personOfInterest = new TVShow("Person of Interest", "1" , "Title ","0" , "Release date");
+		TVShow flash =  new TVShow("The Flash 2014", "1", "Title ", "0", "Release date");
+		TVShow constantine =  new TVShow("Constantine", "1", "Title ", "0", "Release date");
+		TVShow doctorWho =  new TVShow("Doctor Who 2005", "1", "Title ", "0", "Release date");
 		
 		mTVShows.add(personOfInterest);
 		mTVShows.add(flash);
 		mTVShows.add(constantine);
 		mTVShows.add(doctorWho);
-	}
-	public void addShow(TVShow show){
-		mTVShows.add(show);
-	}
-	
-	public void addTrackedShows(TVShow show){
-			if(show.isTracked())
-				mTrackedTVShows.add(show);
-	}
-	
-	public ArrayList<TVShow> getTrackedShows() {
-		return mTrackedTVShows;
-	}
-	
-	public ArrayList<TVShow> getTVShows() {
-		return mTVShows;
-	}
-	
-	public void loadTrackedShowsFromFile(){
-		try{
-			// load here
-			mTrackedTVShows = mSerializer.loadShowsFromFile();
-		}
-		catch(Exception e){
-			// error here
-			mTrackedTVShows = new ArrayList<TVShow>();
-			Log.d(TAG, "Error loading from serializer loadTrackedShowsFromFile \n" + e);
-		}
-	}
-	
-	public void loadJSONShowsFromFile(){
-		try{
-
-			// load here
-			mTVShows = mTvShowSerializer.loadShowsFromFile();
-		}
-		catch(Exception e){
-			// error here
-			mTVShows = new ArrayList<TVShow>();
-			Log.d(TAG, "Error loading from serializer loadJSONShowsFromFile \n" + e);
-		}
-	}
-	
-	public void loadShowsFromTxtFile(){
-		try{
-			// load here
-			mTVShows = mSerializer.loadAllTVShowsFromFile();
-		}
-		catch(Exception e){
-			// error here
-			mTVShows = new ArrayList<TVShow>();
-			Log.d(TAG, "Error loading from serializer \n" + e);
-		}
 	}
 }

@@ -2,25 +2,47 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/fragmentListContainer"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-
-    <ListView
-        android:id="@android:id/list"
+    android:layout_height="match_parent" >
+	<LinearLayout
+        android:id="@+id/search_and_list_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-     
-     <LinearLayout 
-       android:id="@android:id/empty"
-       android:layout_width="wrap_content"
-       android:layout_height="wrap_content"
-       android:orientation="vertical" 
-       android:layout_gravity="center">
-       
-    <TextView 
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/empty_list"
-        android:layout_gravity="center" />
-   </LinearLayout>
-   
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+        <EditText
+	        android:id="@+id/search_show_edit_text"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:hint="@string/search_show_hint" 
+	        android:imeOptions="actionSearch"  
+	        android:inputType="text"/>
+        
+        <Button
+	        android:id="@+id/search_show_button"
+	        style="?android:attr/buttonStyleSmall"
+	        android:layout_width="wrap_content"
+	        android:layout_height="wrap_content"
+	        android:drawableLeft="@android:drawable/ic_menu_search"
+	        android:drawableStart="@android:drawable/ic_menu_search"
+	        android:text="@string/search_Show"
+	        android:layout_gravity="center" />
+        
+		<ListView
+		    android:id="@android:id/list"
+		    android:layout_width="match_parent"
+		    android:layout_height="wrap_content" >
+		</ListView>
+		
+	</LinearLayout>
+	<LinearLayout
+		    android:id="@android:id/empty"
+		    android:layout_width="wrap_content"
+		    android:layout_height="wrap_content"
+		    android:orientation="vertical" 
+	        android:layout_gravity="center">
+
+		    <TextView
+		        android:layout_width="wrap_content"
+		        android:layout_height="wrap_content"
+		        android:text="@string/empty_list_search" />
+		</LinearLayout>
 </FrameLayout>

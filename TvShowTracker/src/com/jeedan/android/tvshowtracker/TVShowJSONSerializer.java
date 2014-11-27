@@ -165,10 +165,9 @@ public class TVShowJSONSerializer {
 		
 		Writer writer = null;
 		try{
-			//File file = mContext.getDir("CriminalIntentApp", Context.MODE_PRIVATE);	
-			Log.d(TAG, getFile().toString());
-			String fileName = getFile().toString().substring(34);
-			Log.d(TAG, fileName);
+			//Log.d(TAG, getFile().toString());
+			//String fileName = getFile().toString().substring(34);
+			//Log.d(TAG, fileName);
 			OutputStream out = new FileOutputStream(getFile().toString());
 			writer = new OutputStreamWriter(out);
 			writer.write(array.toString());
@@ -237,10 +236,10 @@ public class TVShowJSONSerializer {
 				// read from file here
 				jsonString.append(line);
 			}
-			// parse the Json now that we have read and stored the data			
-			Log.d(TAG, "file contents " + jsonString.toString());
-			String epInfo = jsonString.toString().substring(1, jsonString.length()-1);
-			Log.d(TAG, "epInfo " + epInfo);
+			//parse the Json now that we have read and stored the data			
+			//Log.d(TAG, "file contents " + jsonString.toString());
+			//String epInfo = jsonString.toString().substring(1, jsonString.length()-1);
+			//Log.d(TAG, "epInfo " + epInfo);
 			addEpisodeJSONArray(jsonString.toString(), shows);
 		}
 		catch(FileNotFoundException e){

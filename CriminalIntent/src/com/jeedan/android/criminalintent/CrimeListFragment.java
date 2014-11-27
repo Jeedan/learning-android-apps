@@ -4,7 +4,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Locale;
-
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Intent;
 import android.os.Build;
@@ -24,6 +24,7 @@ import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.TextView;
 
+@SuppressLint("InflateParams")
 public class CrimeListFragment extends ListFragment {
 	private static final String TAG = "CrimeListFragment";
 	private ArrayList<Crime> mCrimes;

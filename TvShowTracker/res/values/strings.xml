@@ -2,23 +2,30 @@
 <resources>
 
     <string name="app_name">TvShowTracker</string>
-    <string name="app_all_shows">All shows</string>
+    <string name="app_search_shows">Search for a TV show</string>
     <string name="app_tracked_shows">My tracked shows</string>
     <string name="app_all_episodes">All Arrow episodes</string>
     <string name="app_calendar_title">Today\'s shows</string>
     <string name="action_settings">Settings</string>
-
     <string name="tv_show_name">TV Show Name</string>
     <string name="tv_show_season">Sea</string>
     <string name="tv_show_episode_number">Ep Num</string>
     <string name="tv_show_episode_title">Ep Title </string>
-    <string name="tv_show_release_date">Release Date </string>
-    
-    
+    <string name="tv_show_release_date">Airs on </string>
+    <string name="show_status_text_title">Status: Running</string>
+    <string name="search_show_hint">Enter a TV show name</string>
     <string name="empty_list">There are no TV Shows in this list.</string>
-    
+    <string name="empty_list_search">There are no TV Shows in this list.\nTry searching for something!</string>
+    <string name="search_Show">Search</string>
+    <string name="new_show">Search</string>
     <string name="menu_tracked_shows_label">My Shows</string>
-    <string name="new_show">New Show</string>
+    <string name="menu_search_shows_label">Search</string>
     <string name="tracking_text_check_box">Tracking</string>
-    
+    <string name="saved_to_file_toast">Saved information!</string>
+    <string name="fetched_info_toast">Fetched information!</string>
+    <string name="error_fetched_toast">Could not find show.</string>
+    <string name="enter_show_search_toast">Enter a show to search!</string>
+    <string name="added_show_toast">Added shows to My Shows!</string>
+    <string name="already_tracking_toast">Already tracking this show!</string>
+
 </resources>
