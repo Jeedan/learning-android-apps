@@ -1,5 +1,6 @@
 package com.jeedan.android.tvshowtracker;
 
+import android.annotation.TargetApi;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
@@ -9,6 +10,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 	
 	protected abstract Fragment createFragment();
 	
+	@TargetApi(11)
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
