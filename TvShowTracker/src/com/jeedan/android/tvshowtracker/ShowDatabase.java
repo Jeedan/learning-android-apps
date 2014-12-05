@@ -3,6 +3,8 @@ package com.jeedan.android.tvshowtracker;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import org.json.JSONException;
 
@@ -39,10 +41,25 @@ public class ShowDatabase {
 		mTVShows = new ArrayList<TVShow>();
 	//	mTrackedTVShows = new ArrayList<TVShow>();
 		loadTrackedShowsFromFile();
+		sortShowsAlphabetically();
 	}
 
 	public void addShow(TVShow show){
 		mTVShows.add(show);
+	}
+	
+	public void sortShowsAlphabetically(){
+		// sort shows alphabetically
+		Collections.sort(mTrackedTVShows, new Comparator<TVShow>(){
+
+			@Override
+			public int compare(TVShow lhs, TVShow rhs) {
+				// TODO Auto-generated method stub
+
+				return lhs.getShowName().compareTo(rhs.getShowName());
+			}
+
+		});
 	}
 	
 	public boolean containsShow(String name){

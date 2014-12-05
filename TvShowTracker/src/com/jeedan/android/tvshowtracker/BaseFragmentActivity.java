@@ -9,13 +9,13 @@ import android.support.v4.app.FragmentManager;
 public abstract class BaseFragmentActivity extends FragmentActivity {
 	
 	protected abstract Fragment createFragment();
-	
+
 	@TargetApi(11)
 	@Override
 	public void onCreate(Bundle savedInstanceState){
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_fragment);
-		
+
 		FragmentManager fm = getSupportFragmentManager();
 		Fragment fragment = fm.findFragmentById(R.id.fragmentContainer);
 		

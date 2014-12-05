@@ -16,16 +16,6 @@
 	        android:imeOptions="actionSearch"  
 	        android:inputType="text"/>
         
-        <Button
-	        android:id="@+id/search_show_button"
-	        style="?android:attr/buttonStyleSmall"
-	        android:layout_width="wrap_content"
-	        android:layout_height="wrap_content"
-	        android:drawableLeft="@android:drawable/ic_menu_search"
-	        android:drawableStart="@android:drawable/ic_menu_search"
-	        android:text="@string/search_Show"
-	        android:layout_gravity="center" />
-        
 		<ListView
 		    android:id="@android:id/list"
 		    android:layout_width="match_parent"

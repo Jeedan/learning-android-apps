@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <typeInfoHistroy>
 <typeInfo handle="=CriminalIntent/src&lt;com.jeedan.android.criminalintent{SimpleFragmentActivity.java[SimpleFragmentActivity" modifiers="1025" timestamp="1413882892737"/>
-<typeInfo handle="=TvShowTracker/src&lt;com.jeedan.android.tvshowtracker{BaseFragmentActivity.java[BaseFragmentActivity" modifiers="1025" timestamp="1417341589542"/>
+<typeInfo handle="=TvShowTracker/src&lt;com.jeedan.android.tvshowtracker{BaseFragmentActivity.java[BaseFragmentActivity" modifiers="1025" timestamp="1417444682024"/>
+<typeInfo handle="=TvShowTracker/C:\/Users\/Jeedan\/Documents\/GitHub\/Android Workspaces\/appcompat_v7\/libs\/android-support-v4.jar&lt;android.support.v4.app(ListFragment.class[ListFragment" modifiers="33" timestamp="1412881915440"/>
 </typeInfoHistroy>

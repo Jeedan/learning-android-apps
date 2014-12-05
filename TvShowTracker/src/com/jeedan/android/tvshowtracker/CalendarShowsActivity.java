@@ -2,12 +2,11 @@ package com.jeedan.android.tvshowtracker;
 
 import android.support.v4.app.Fragment;
 
-public class TrackedShowsActivity extends BaseFragmentActivity {
+public class CalendarShowsActivity  extends BaseFragmentActivity{
 
 	@Override
 	protected Fragment createFragment() {
 		// TODO Auto-generated method stub
-		return new TrackedShowsFragment();
+		return new CalendarShowsListFragment();
 	}
-
 }

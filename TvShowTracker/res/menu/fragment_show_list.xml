@@ -7,9 +7,10 @@
        android:icon="@android:drawable/ic_menu_add"
        android:title="@string/new_show"
        android:showAsAction="ifRoom|withText" /> -->
+     <item
+        android:id="@+id/action_settings"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        android:showAsAction="never"/>
     
-    <item
-       android:id="@+id/menu_item_tracked_shows"
-       android:title="@string/menu_tracked_shows_label"
-       android:showAsAction="ifRoom|withText" />
 </menu>

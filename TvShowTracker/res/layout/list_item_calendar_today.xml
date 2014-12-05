@@ -2,7 +2,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_activated"
     android:paddingBottom="4dp"
     style="?android:listSeparatorTextViewStyle" >
 
@@ -37,17 +36,4 @@
         android:paddingRight="4dp"
         android:paddingTop="4dp"
         android:text="@string/tv_show_episode_title" />
-
-    <TextView
-        android:id="@+id/tracked_show_release_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/tracked_show_name_text_view"
-        android:layout_toEndOf="@id/tracked_show_episode_text_view"
-        android:layout_toRightOf="@id/tracked_show_episode_text_view"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:text="@string/tv_show_release_date" />
-
 </RelativeLayout>

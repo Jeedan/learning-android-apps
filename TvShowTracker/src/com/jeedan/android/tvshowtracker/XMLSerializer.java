@@ -35,11 +35,16 @@ public class XMLSerializer {
 		String seasons = null;
 		String airStatus = null;
 		String showUrl = null;
+		String tvRage_id = null;
 		
 		while(eventType != XmlPullParser.END_DOCUMENT){
 			String name = parser.getName();
 			if(eventType == XmlPullParser.END_TAG ) {
-				if(name.equals("name")){
+				if(name.equals("showid")){
+					if(text.equals("")) return;
+					tvRage_id = text;
+					Log.d(TAG, "MY show tvRage_id: " + tvRage_id);
+				}else if(name.equals("name")){
 					if(text.equals("")) return;
 					showName = text;
 				}else if(name.equals("seasons")){
@@ -48,7 +53,7 @@ public class XMLSerializer {
 				}else if(name.equals("link")){
 					if(text.equals("")) return;
 					showUrl = text;
-					Log.d(TAG, "TVrage url" + showUrl);
+				//	Log.d(TAG, "TVrage url" + showUrl);
 				}else if(name.equals("status")){
 					if(text.equals("")) return;
 					airStatus = text;
@@ -62,6 +67,7 @@ public class XMLSerializer {
 					show.setShowName(showName);
 					show.setTotalSeasons(seasons);
 					show.setAirStatus(airStatus);
+					show.setTVRage_id(tvRage_id);
 					shows.add(show);
 				}
 	          } else if(eventType == XmlPullParser.TEXT){
@@ -87,11 +93,18 @@ public class XMLSerializer {
 		String seasonAndEpisodeNumber = "00x00";
 		String epTitle = "";
 		String epAirDate = "";
+		String tvRage_id = "";
 	
 		String text = "";	
 		int airTimeCounter = 0;
 		while(eventType != XmlPullParser.END_DOCUMENT){
 			String name = parser.getName();
+			if(eventType == XmlPullParser.START_TAG){
+				if(name.equals("show")){
+					tvRage_id = parser.getAttributeValue(0);
+					Log.d(TAG, "MY show tvRage_id: " + tvRage_id);
+				}
+			}
 			if(eventType == XmlPullParser.END_TAG){
 				if(name.equals(tagName)){
 					if(text.equals("")) return;
@@ -118,7 +131,7 @@ public class XMLSerializer {
 				if(seasonAndEpisodeNumber == null || seasonAndEpisodeNumber.equals(""))
 					seasonAndEpisodeNumber = "00x00";
 
-				setShowInformation(show, name, epShowName, epTitle, seasonAndEpisodeNumber, epAirDate);
+				setShowInformation(show, name, epShowName,tvRage_id, epTitle, seasonAndEpisodeNumber, epAirDate);
 			
 			} else if(eventType == XmlPullParser.TEXT){
 				text = parser.getText();
@@ -128,12 +141,13 @@ public class XMLSerializer {
 		}
 	}
 	
-	public void setShowInformation(TVShow show, String xmlTag, String showName, String title, String number, String airDate){
+	public void setShowInformation(TVShow show, String xmlTag, String showName, String tvRage_id, String title, String number, String airDate){
 		String seasonPrefix = "s";
 		String episodePrefix = "e";String episodeNumber =  episodePrefix + number.substring(3);
 		String seasonNumber = seasonPrefix + number.substring(0, 2);		
 		
 		show.setShowName(showName);
+		show.setTVRage_id(tvRage_id);
 		if(xmlTag.equals(XML_LATESTEPISODE)){
 			show.setSeason(seasonNumber);	
 			show.setEpisodeNumber(episodeNumber);

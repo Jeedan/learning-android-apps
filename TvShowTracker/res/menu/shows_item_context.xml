@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+    <item
+        android:id="@+id/menu_item_delete_show"
+        android:icon="@android:drawable/ic_menu_delete" 
+        android:title="@string/menu_delete_shows_label"
+        android:showAsAction="ifRoom|withText"
+        />
+	
+	<item
+        android:id="@+id/menu_item_fetch_update_show"
+        android:icon="@android:drawable/ic_menu_search" 
+        android:title="@string/menu_update_shows_label"
+        android:showAsAction="ifRoom|withText"
+        />
+</menu>

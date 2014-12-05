@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
@@ -11,6 +12,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
+import android.support.v4.app.NavUtils;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
@@ -20,56 +22,89 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 @SuppressLint("InflateParams")
-public class TVShowListFragment extends ListFragment {
+public class SearchShowsListFragment extends ListFragment {
 	private static final String TAG = "TVShowListFragment";
-	public  static final String EXTRA_SHOW_TRACKED = "com.jeedan.android.tvshowtracker.tracked";
 	
-	private ArrayList<TVShow> mTVShows;
+	public  static final String EXTRA_SHOW_TRACKED = "com.jeedan.android.tvshowtracker.tracked";
+	private static final String EXTRA_TEST = "testString";
 	
 	private boolean mSubtitleVisible;
+	private ArrayList<TVShow> mTVShows;
+	private EditText searchEditText;
+	
+	private ShowDatabase showDB; 
 	
 	private String mShowURL;  // the edit text string we type will be stored so we can search tvrage with this string.
 	private boolean mReturnedShows; // if we get shows back from searching, show a toast
+
+	public static SearchShowsListFragment newInstance(String test){
+		SearchShowsListFragment tvLF = new SearchShowsListFragment();
+		
+		// supply input
+		Bundle args = new Bundle();
+		args.putString(EXTRA_TEST, test);
+		tvLF.setArguments(args);
+		return tvLF;
+	}
 	
+	@TargetApi(14)
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
-		setHasOptionsMenu(true);
-		// get the tvshow list from the singleton ShowDatabase 
-		// the tvshows list will be empty
-		// in this activity we will search tvrage.com for the shows we want and they will be added into this arraylist.
-		mTVShows = ShowDatabase.getInstance(getActivity()).getTVShows();
 
+		getActivity().setTitle(R.string.app_search_shows);
+		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
+			setHasOptionsMenu(true);
+			if(savedInstanceState != null){
+				Log.d(TAG, "savedInstance is not null");
+			}
+		}	
+		
+		// get arguments passed by from starting a new fragment
+		if(getArguments() != null){
+			testString = getArguments().getString(EXTRA_TEST, "getArguments() did not work");	
+			Log.d(TAG, "getArguments: " + testString);
+		}
+		
+		showDB = ShowDatabase.getInstance(getActivity());
+		// get the tvshow list from the singleton ShowDatabase 
+		mTVShows = showDB.getTVShows();
+		
 		// set up the adapter to display list view
 		setupAdapter();
 		setRetainInstance(true);// retain this fragment upon rotation
-		mSubtitleVisible = true; // the text underneath the app name
+		getActivity().getActionBar().setHomeButtonEnabled(true);
+		mSubtitleVisible = false; // the text underneath the app name
 	}
 	
-	@TargetApi(11)
+
+	private void hideKeyboard() {
+		InputMethodManager imm = (InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+		imm.hideSoftInputFromWindow(searchEditText.getWindowToken(), 0);
+	}
+	
+	String testString = "";
+	@TargetApi(12)
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup parent, Bundle savedInstanceState){
 		View v = inflater.inflate(R.layout.fragment_alltvshowslist, parent, false);
 		
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-			if(mSubtitleVisible)
-				getActivity().getActionBar().setSubtitle("");
-
+			getActivity().getActionBar().setDisplayHomeAsUpEnabled(true);
+		
 		// the edit text is where we type in the show we are looking for
 		// we can search for more than 1 show at a time thanks to tvRage database's search functionality
-		EditText searchEditText = (EditText)v.findViewById(R.id.search_show_edit_text);
+		searchEditText = (EditText)v.findViewById(R.id.search_show_edit_text);
 		searchEditText.addTextChangedListener(new TextWatcher() {
 			
 			@Override
@@ -97,21 +132,12 @@ public class TVShowListFragment extends ListFragment {
 		    @Override
 		    public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
 		        if (actionId == EditorInfo.IME_ACTION_SEARCH) {
-		        	addShow();
+		        	searchShows();
+		        	hideKeyboard();
 		            return true;
 		        }
 		        return false;
 		    }
-		});
-
-		Button searchButton = (Button)v.findViewById(R.id.search_show_button);
-		searchButton.setOnClickListener(new OnClickListener() {
-			
-			@Override
-			public void onClick(View v) {
-				// TODO Auto-generated method stub
-				addShow();
-			}
 		});
 		return v; 
 	}
@@ -124,11 +150,11 @@ public class TVShowListFragment extends ListFragment {
 		/*When you click on a tv show, add it to the "My tracked tv shows list" */
 		String showName = show.getShowName().replaceAll(" ", "_"); // replaces all spaces with an _
 
-		if(ShowDatabase.getInstance(getActivity()).containsShow(showName)){
+		if(showDB.containsShow(showName)){
 			Toast.makeText(getActivity(), R.string.already_tracking_toast, Toast.LENGTH_SHORT).show();
 		}else
 		{
-			ShowDatabase.getInstance(getActivity()).addTrackedShows(show); // add show only if we don't already track it
+			showDB.addTrackedShows(show); // add show only if we don't already track it
 			Toast.makeText(getActivity(), R.string.added_show_toast, Toast.LENGTH_SHORT).show();	
 			ShowDatabase.mHasLoadedTracked = false;
 		}		
@@ -143,13 +169,20 @@ public class TVShowListFragment extends ListFragment {
 	@Override
 	public void onResume(){
 		super.onResume();
+		getActivity().setTitle(R.string.app_search_shows);
 		((AllTvShowsAdapter)getListAdapter()).notifyDataSetChanged();
 	}
 	
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
     	super.onActivityResult(requestCode, resultCode, data);
+    	
+    	if (resultCode != Activity.RESULT_OK)
+			return;
     
+    	testString = data.getStringExtra(EXTRA_TEST);
+    	Log.d(TAG, "onActivityResult:" + testString);
+    	
 		((AllTvShowsAdapter)getListAdapter()).notifyDataSetChanged();
     }
     
@@ -158,6 +191,7 @@ public class TVShowListFragment extends ListFragment {
 		super.onCreateOptionsMenu(menu, inflater);
 		// Inflate the menu; this adds items to the action bar if it is present.
 		inflater.inflate(R.menu.fragment_show_list, menu);
+			
 	}
 	
 	@TargetApi(11)
@@ -167,13 +201,18 @@ public class TVShowListFragment extends ListFragment {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		switch(item.getItemId()){
-		case R.id.menu_item_tracked_shows:	
-			Intent i = new Intent(getActivity(), TrackedShowsActivity.class);
-			Log.d(TAG, "TVShows size: " + mTVShows.size());
-			startActivity(i);
+		case android.R.id.home:			
+			// check if we have a parent activity to navigate to
+			// if we do navigate there from here
+			if(NavUtils.getParentActivityIntent(getActivity()) != null){
+				NavUtils.navigateUpFromSameTask(getActivity());
+			}
+			return true;
+		case R.id.action_settings:
+			Toast.makeText(getActivity(), "One day this will open the settings window!", Toast.LENGTH_SHORT).show();
 			return true;
 		default:
-				return super.onOptionsItemSelected(item);
+			return super.onOptionsItemSelected(item);
 				
 		}
 	}
@@ -194,7 +233,7 @@ public class TVShowListFragment extends ListFragment {
 
 	}
 	
-	private void addShow(){
+	private void searchShows(){
 		//if(mTVShows.size() <= 0) // only load if we haven't loaded already
 		if(mShowURL != null)
 			new FetchShowInfo(getActivity()).execute(); // create a task that loads show information from the api
@@ -266,17 +305,15 @@ public class TVShowListFragment extends ListFragment {
 			super.onPostExecute(shows);
 			if(dialog.isShowing()) dialog.dismiss(); // close the dialog
 
-			Log.d(TAG, "before adding episode " + mTVShows.size());
 			mTVShows = shows;
 			
-			Log.d(TAG, "after " + mTVShows.size());
-			
-			if(mReturnedShows)
-				Toast.makeText(getActivity(), R.string.fetched_info_toast, Toast.LENGTH_SHORT).show();
-			else
-				Toast.makeText(getActivity(), R.string.error_fetched_toast, Toast.LENGTH_LONG).show();
-				
+			//Log.d(TAG, "after " + mTVShows.size());
+
 			setupAdapter();
+			if(!mReturnedShows)
+				Toast.makeText(getActivity(), R.string.error_fetched_toast, Toast.LENGTH_LONG).show();
+//			else
+//				Toast.makeText(getActivity(), R.string.fetched_info_toast, Toast.LENGTH_SHORT).show();	
 		}
 	}
 }

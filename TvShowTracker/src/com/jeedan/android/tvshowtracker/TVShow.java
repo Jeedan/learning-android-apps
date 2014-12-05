@@ -15,13 +15,20 @@ public class TVShow {
 	private static final String JSON_NUMBER = "number";
 	private static final String JSON_SHOW = "show";
 	private static final String JSON_TRACKING = "tracking";
+	private static final String JSON_UPDATED_INFO = "updatedInfo";
+	private static final String JSON_NEXT_EP = "next_episode";
+	private static final String JSON_Next_RELEASE_DATE = "next_Release_Date";
+	private static final String JSON_TVRAGE_ID = "tv_Rage_id";
 	
 	JSONObject mEpisodeObject;
 	JSONObject mShowObject;
 	
+	// tvRage ID
+	private String mTVRage_id;
 	private String mShowName;
 	private String mTotalSeasons;
 	private String mTotalEpisodes;
+	
 	// latest episode
 	private String mSeason;
 	private String mEpisodeNumber;
@@ -35,13 +42,8 @@ public class TVShow {
 	private String mNextReleaseDate;
 	
 	private boolean mTracked;
-	
+	private boolean mUpdatedInformation;
 	public TVShow(){
-		mShowName = "Show Title";
-		mSeason = "1";
-		mEpisodeTitle = "Episode Title";
-		mEpisodeNumber = "1";
-		mReleaseDate = "Release Date";
 	}
 	public TVShow(String showName, String season, String episodeTitle, String epNumber, String releaseDate){
 		mShowName = showName;
@@ -65,6 +67,7 @@ public class TVShow {
 		String title = null;
 		String number = null;
 		JSONObject show = null;
+		JSONObject nextEp = null;
 		
 		if(json.has("error")){
 			return;
@@ -74,6 +77,7 @@ public class TVShow {
 			title = json.getString(JSON_TITLE);
 			number = json.getString(JSON_NUMBER);
 			show = json.getJSONObject(JSON_SHOW);
+			nextEp = json.getJSONObject(JSON_NEXT_EP);
 		}else if(json.has(JSON_EPISODE)){
 			episode = json.getJSONObject(JSON_EPISODE);	
 			season = episode.getString(JSON_SEASON);
@@ -81,6 +85,7 @@ public class TVShow {
 			title = episode.getString(JSON_TITLE);
 			number = episode.getString(JSON_NUMBER);
 			show = episode.getJSONObject(JSON_SHOW);
+			nextEp = episode.getJSONObject(JSON_NEXT_EP);
 		}
 		mShowObject = show; // objects for saving
 		mEpisodeObject = episode; // objcets for saving
@@ -91,7 +96,25 @@ public class TVShow {
 		mEpisodeNumber = number; // episode number
 
 		mShowName = show.getString(JSON_TITLE);
+		if(show.has(JSON_TVRAGE_ID)){
+			mTVRage_id = show.getString(JSON_TVRAGE_ID);
+		}
+		if(nextEp.has(JSON_Next_RELEASE_DATE)){
+			mNextReleaseDate = nextEp.getString(JSON_Next_RELEASE_DATE);
+		}
+		if(nextEp.has(JSON_SEASON)){
+			mNextSeason = nextEp.getString(JSON_SEASON);
+		}
+		if(nextEp.has(JSON_TITLE)){
+			mNextEpisodeTitle = nextEp.getString(JSON_TITLE);
+		}
+
+		if(nextEp.has(JSON_NUMBER)){
+			mNextEpisodeNumber = nextEp.getString(JSON_NUMBER);
+		}
 		
+		if(show.has(JSON_UPDATED_INFO))
+			mUpdatedInformation = show.getBoolean(JSON_UPDATED_INFO);
 		if(json.has(JSON_TRACKING))
 			mTracked = json.getBoolean(JSON_TRACKING);
 	}
@@ -109,24 +132,22 @@ public class TVShow {
 		episode.put(JSON_RELEASE_DATE, mReleaseDate);
 		episode.put(JSON_TITLE, mEpisodeTitle);
 		episode.put(JSON_NUMBER, mEpisodeNumber);		
+		
 		JSONObject show = new JSONObject();
 		episode.put(JSON_SHOW, show);
 		show.put(JSON_TITLE, mShowName);
+		show.put(JSON_UPDATED_INFO, mUpdatedInformation);
+		show.put(JSON_TVRAGE_ID, mTVRage_id);
 		// next season
 		// next ep
 		// next airdate
-		/*
-		JSONObject json = episode.getJSONObject(JSON_EPISODE);
-		episode.put(JSON_SEASON, mSeason);
-		episode.put(JSON_RELEASE_DATE, mReleaseDate);
-		episode.put(JSON_TITLE, mEpisodeTitle);
-		episode.put(JSON_NUMBER, mEpisodeNumber);
-		JSONObject show = new JSONObject();
-		show.put(JSON_SHOW, show);
-		show.put(JSON_EPGUIDE_NAME, mEpGuideName);
-		show.put(JSON_TITLE, mShowName);
-		show.put(JSON_IMDB_ID, mImdbId);
-		*/
+		JSONObject nextEp = new JSONObject();
+		episode.put(JSON_NEXT_EP, nextEp);
+		nextEp.put(JSON_SEASON, mNextSeason);
+		nextEp.put(JSON_Next_RELEASE_DATE, mNextReleaseDate);
+		nextEp.put(JSON_TITLE, mNextEpisodeTitle);
+		nextEp.put(JSON_NUMBER, mNextEpisodeNumber);		
+		
 		return episode;
 	}
 	
@@ -137,7 +158,21 @@ public class TVShow {
 	public void setTracked(boolean tracked) {
 		mTracked = tracked;
 	}
+	
+	public boolean getUpdatedInformation() {
+		return mUpdatedInformation;
+	}
 
+	public void setUpdatedInformation(boolean updated) {
+		mUpdatedInformation = updated;
+	}
+	public String getTVRage_id() {
+		return mTVRage_id;
+	}
+
+	public void setTVRage_id(String tvRage_id) {
+		mTVRage_id = tvRage_id;
+	}
 	public String getShowName() {
 		return mShowName;
 	}
