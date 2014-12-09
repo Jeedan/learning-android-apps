@@ -189,7 +189,7 @@ public class SearchShowsListFragment extends ListFragment {
 	@Override
 	public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 		super.onCreateOptionsMenu(menu, inflater);
-		// Inflate the menu; this adds items to the action bar if it is present.
+		// Inflate the menu; this adds items to the action bar	 if it is present.
 		inflater.inflate(R.menu.fragment_show_list, menu);
 			
 	}
@@ -210,6 +210,7 @@ public class SearchShowsListFragment extends ListFragment {
 			return true;
 		case R.id.action_settings:
 			Toast.makeText(getActivity(), "One day this will open the settings window!", Toast.LENGTH_SHORT).show();
+			//searchShows();  we only used this because the enter button in the emulator did not work
 			return true;
 		default:
 			return super.onOptionsItemSelected(item);

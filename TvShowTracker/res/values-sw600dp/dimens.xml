@@ -4,12 +4,12 @@
     <!-- Default screen margins, per the Android Design guidelines. -->
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="navigation_drawer_width">200dp</dimen>
+    <dimen name="navigation_drawer_width">240dp</dimen>
 
-    <dimen name="show_show_name_text_view_size">14sp</dimen>
-    <dimen name="show_season_text_view_size">8sp</dimen>
-    <dimen name="show_episode_text_view_size">8sp</dimen>
-    <dimen name="show_airDate_text_view_size">8sp</dimen>
+    <dimen name="show_show_name_text_view_size">20sp</dimen>
+    <dimen name="show_season_text_view_size">14sp</dimen>
+    <dimen name="show_episode_text_view_size">14sp</dimen>
+    <dimen name="show_airDate_text_view_size">14sp</dimen>
     
     <dimen name="padding_value">2dp</dimen>
 </resources>

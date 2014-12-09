@@ -2,30 +2,49 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@drawable/background_activated"
     android:paddingBottom="4dp"
+    android:background="@drawable/background_activated"
     style="?android:listSeparatorTextViewStyle" >
-
+    
+    <!-- SHOW IMAGE INFO <ImageView 
+        android:id="@+id/show_icon_imageView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/tv_show_name"
+        android:src="@drawable/prototype_tv_launcher_icon" /> -->
+   
+    
+    <!-- SHOW NAME 
+        android:layout_toRightOf="@+id/show_icon_imageView"
+        android:layout_toEndOf="@+id/show_icon_imageView" 
+        android:layout_below="@+id/show_icon_imageView"-->
     <TextView
         android:id="@+id/tracked_show_name_text_view"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
+        android:paddingLeft="@dimen/padding_value"
+        android:paddingTop="10dp"
+        android:paddingRight="@dimen/padding_value"
         android:text="@string/tv_show_name"
-        android:textSize="20sp"
+        android:textSize="@dimen/show_show_name_text_view_size"
         android:textStyle="bold" />
 
+    <!-- SEASON INFO 
+        android:layout_toRightOf="@+id/show_icon_imageView"
+        android:layout_toEndOf="@+id/show_icon_imageView"-->
     <TextView
         android:id="@+id/tracked_show_season_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tracked_show_name_text_view"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:text="@string/tv_show_season" />
+        android:paddingLeft="@dimen/padding_value"
+        android:paddingRight="@dimen/padding_value"
+        android:paddingTop="@dimen/padding_value"
+        android:textSize="@dimen/show_season_text_view_size"
+        android:text="@string/tv_show_season"
+        android:textColor="@color/show_subtitle_text_view_color"/>
 
+    <!-- EPISODE INFO -->
     <TextView
         android:id="@+id/tracked_show_episode_text_view"
         android:layout_width="wrap_content"
@@ -33,11 +52,14 @@
         android:layout_below="@id/tracked_show_name_text_view"
         android:layout_toRightOf="@id/tracked_show_season_text_view"
         android:layout_toEndOf="@id/tracked_show_season_text_view"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:text="@string/tv_show_episode_title" />
+        android:paddingLeft="@dimen/padding_value"
+        android:paddingRight="@dimen/padding_value"
+        android:paddingTop="@dimen/padding_value"
+        android:textSize="@dimen/show_episode_text_view_size"
+        android:text="@string/tv_show_episode_title"
+        android:textColor="@color/show_subtitle_text_view_color" />
 
+    <!-- RELEASE DATE INFO -->
     <TextView
         android:id="@+id/tracked_show_release_date"
         android:layout_width="wrap_content"
@@ -45,9 +67,14 @@
         android:layout_below="@id/tracked_show_name_text_view"
         android:layout_toEndOf="@id/tracked_show_episode_text_view"
         android:layout_toRightOf="@id/tracked_show_episode_text_view"
-        android:paddingLeft="4dp"
-        android:paddingRight="4dp"
-        android:paddingTop="4dp"
-        android:text="@string/tv_show_release_date" />
+        android:paddingLeft="@dimen/padding_value"
+        android:paddingRight="@dimen/padding_value"
+        android:paddingTop="@dimen/padding_value"        
+        android:lines="1"
+        android:ellipsize="end" 
+        android:textSize="@dimen/show_airDate_text_view_size"
+        android:text="@string/tv_show_release_date"
+        android:textColor="@color/show_subtitle_text_view_color" />
+
 
 </RelativeLayout>

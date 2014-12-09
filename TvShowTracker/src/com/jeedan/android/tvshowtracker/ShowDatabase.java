@@ -88,9 +88,11 @@ public class ShowDatabase {
 	public ArrayList<TVShow> getTrackedShows() {
 		return mTrackedTVShows;
 	}
+	
 	public void setTrackedShows(ArrayList<TVShow> shows) {
 		mTrackedTVShows = shows;
 	}
+	
 	public ArrayList<TVShow> getTVShows() {
 		return mTVShows;
 	}

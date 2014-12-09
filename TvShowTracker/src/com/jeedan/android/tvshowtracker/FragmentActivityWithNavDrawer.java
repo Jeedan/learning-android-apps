@@ -97,9 +97,9 @@ public abstract class FragmentActivityWithNavDrawer extends FragmentActivity {
 		case 0:
 		{
 			/* SEARCH SHOWS FRAGMENT */
-			createSearchShowFragment();
+			//createSearchShowFragment();
 			// position 1 in the drawer list
-			//createSearchTVShowActivity(); /* use this if the fragment becomes buggy*/
+			createSearchTVShowActivity(); 
 			break;
 		}
 		case 1:

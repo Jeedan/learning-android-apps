@@ -225,12 +225,12 @@ public class CalendarShowsListFragment extends ListFragment {
 			// season and episode number
 			TextView SeasonEpisodeTextView = (TextView) convertView
 					.findViewById(R.id.tracked_show_season_text_view);
-			SeasonEpisodeTextView.setText(show.getSeason()
-					+ show.getEpisodeNumber());
+			SeasonEpisodeTextView.setText(show.getNextSeason()
+					+ show.getNextEpisodeNumber());
 			// episode title
 			TextView episodeTextView = (TextView) convertView
 					.findViewById(R.id.tracked_show_episode_text_view);
-			episodeTextView.setText(" - " + show.getEpisodeTitle());
+			episodeTextView.setText("- " + show.getNextEpisodeTitle());
 			
 			return convertView;
 		}

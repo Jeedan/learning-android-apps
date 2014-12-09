@@ -210,7 +210,7 @@ public class XMLSerializer {
 		return shows;
 	}
 	
-	private byte[] getURLBytes(String urlSpec) throws IOException{
+	public byte[] getURLBytes(String urlSpec) throws IOException{
 		URL url = new URL(urlSpec);
 		HttpURLConnection connection = (HttpURLConnection)url.openConnection();
 		

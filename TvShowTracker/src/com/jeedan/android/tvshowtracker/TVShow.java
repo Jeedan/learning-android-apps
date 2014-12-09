@@ -4,6 +4,8 @@ package com.jeedan.android.tvshowtracker;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.graphics.Bitmap;
+
 public class TVShow {
 	// all show information
 	
@@ -43,8 +45,14 @@ public class TVShow {
 	
 	private boolean mTracked;
 	private boolean mUpdatedInformation;
+	
+	private String mBannerURL;
+	private Bitmap mBanner;
+	
 	public TVShow(){
+		mBanner = null;
 	}
+	
 	public TVShow(String showName, String season, String episodeTitle, String epNumber, String releaseDate){
 		mShowName = showName;
 		mSeason = season;
@@ -166,6 +174,21 @@ public class TVShow {
 	public void setUpdatedInformation(boolean updated) {
 		mUpdatedInformation = updated;
 	}
+	public String getBannerURL() {
+		return mBannerURL;
+	}	
+
+	public void setBannerURL(String imgUrl) {
+		mBannerURL = imgUrl;
+	}
+	public Bitmap getBanner() {
+		return mBanner;
+	}
+
+	public void setBanner(Bitmap bm) {
+		mBanner = bm;
+	}
+	
 	public String getTVRage_id() {
 		return mTVRage_id;
 	}
