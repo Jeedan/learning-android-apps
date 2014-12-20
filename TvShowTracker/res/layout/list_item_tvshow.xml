@@ -2,11 +2,20 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="4dp"
+    android:paddingBottom="8dp"
+    android:paddingTop="8dp"
     style="?android:listSeparatorTextViewStyle" >
-
+    
+	<ImageView
+	    android:id="@+id/show_icon_imageView"
+	    android:layout_width="fill_parent"
+	    android:layout_height="wrap_content"
+	    android:contentDescription="@string/tv_show_name"
+	    android:src="@drawable/no_img_found" />
+	
     <TextView
         android:id="@+id/tv_show_name_text_view"
+        android:layout_below="@id/show_icon_imageView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/padding_value"
@@ -16,7 +25,7 @@
         android:textStyle="bold" />
     
     <TextView
-        android:id="@+id/tv_show_season_text_view"
+        android:id="@+id/overview_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/tv_show_name_text_view"
@@ -24,20 +33,21 @@
         android:paddingRight="@dimen/padding_value"
         android:paddingTop="@dimen/padding_value"
         android:textSize="@dimen/show_season_text_view_size"
-        android:text="@string/tv_show_season" 
-        android:textColor="@color/show_subtitle_text_view_color" />
+        android:text="@string/show_overview_label" 
+        android:textColor="@color/light_blue" />
 
+    <!-- 
+        android:layout_toRightOf="@id/tv_show_season_text_view"
+        android:layout_toEndOf="@id/tv_show_season_text_view" -->
     <TextView
-        android:id="@+id/show_status_text_view"
+        android:id="@+id/network_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tv_show_name_text_view"
-        android:layout_toRightOf="@id/tv_show_season_text_view"
-        android:layout_toEndOf="@id/tv_show_season_text_view"
+        android:layout_below="@id/overview_text_view"
         android:paddingLeft="@dimen/padding_value"
         android:paddingRight="@dimen/padding_value"
         android:paddingTop="@dimen/padding_value"
         android:textSize="@dimen/show_season_text_view_size"
-        android:text="@string/show_status_text_title"
-        android:textColor="@color/show_subtitle_text_view_color"  />  
+        android:text="@string/show_network_label"
+        android:textColor="@color/light_blue"  />  
 </RelativeLayout>

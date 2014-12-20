@@ -72,7 +72,7 @@
   "C:\\Android SDK\\adt-bundle-windows-x86_64-20131030\\sdk\\platforms\\android-21\\android.jar": {
     "location": "C:\\Android SDK\\adt-bundle-windows-x86_64-20131030\\sdk\\platforms\\android-21\\android.jar",
     "status": "UNRESOLVED",
-    "error": "No call model found for \u0027C:\\Android SDK\\adt-bundle-windows-x86_64-20131030\\sdk\\platforms\\android-21\\android.jar\u0027. Neither fingerprint \u00275a0ffbfcbf497991d90727ba9c063bd1e5f2d218\u0027 nor symbolic name \u0027android\u0027 are known."
+    "error": "No call model found for \u0027C:\\Android SDK\\adt-bundle-windows-x86_64-20131030\\sdk\\platforms\\android-21\\android.jar\u0027. Neither fingerprint \u0027d77ef97c5800106b74180850a639bffe396a20ad\u0027 nor symbolic name \u0027android\u0027 are known."
   },
   "C:\\Users\\Jeedan\\Documents\\GitHub\\Android Workspaces\\appcompat_v7\\libs\\android-support-v7-appcompat.jar": {
     "location": "C:\\Users\\Jeedan\\Documents\\GitHub\\Android Workspaces\\appcompat_v7\\libs\\android-support-v7-appcompat.jar",

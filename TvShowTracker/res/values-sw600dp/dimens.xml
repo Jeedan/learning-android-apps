@@ -12,4 +12,5 @@
     <dimen name="show_airDate_text_view_size">14sp</dimen>
     
     <dimen name="padding_value">2dp</dimen>
+    <dimen name="bigger_pad_value">8dp</dimen>
 </resources>

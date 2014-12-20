@@ -5,7 +5,11 @@
         AppBaseTheme from BOTH res/values/styles.xml and
         res/values-v11/styles.xml on API 14+ devices.
     -->
-    <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- API 14 theme customizations can go here. -->
+     <style name="AppBaseTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+	    <!--   winow background -->
+	    <item name="android:windowBackground">@color/medium_gray</item>
+	    <!--   Text but don't know if it is for all texts -->
+	    <item name="android:textColorPrimary">@color/light_gray</item>
+	    <item name="android:textColor">@color/white</item>
     </style>
 </resources>

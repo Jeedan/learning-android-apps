@@ -9,24 +9,27 @@
     <string name="action_settings">Settings</string>
     
     <string name="tv_show_name">TV Show Name</string>
-    <string name="tv_show_season">Sea</string>
-    <string name="tv_show_episode_number">Ep Num</string>
+    <string name="tv_show_season">Season</string>
     <string name="tv_show_episode_title">Ep Title </string>
-    <string name="tv_show_release_date">Airs on </string>
+    <string name="tv_show_release_date">Aired on </string>
+    <string name="show_overview_label">Overview</string>
     <string name="show_status_text_title">Status: Running</string>
+    <string name="show_air_day_time_text">Airs on: Day at 5</string>
+    <string name="show_network_label">Network</string>
     <string name="search_show_hint">Enter a TV show name</string>
-    <string name="empty_list">There are no TV Shows in this list.</string>
-    <string name="empty_list_search">There are no TV Shows in this list.\nTry searching for something!</string>
-    <string name="search_Show">Search</string>
-    <string name="new_show">Search</string>
     
-    <string name="menu_tracked_shows_label">My Shows</string>
+    <string name="empty_list_calendar">No shows aired today.</string>
+    <string name="empty_list_search">There are no TV Shows in this list.\nTry searching for something!</string>
+    
+    <string name="search_Show">Search</string>
+    <string name="new_show">New Show</string>
+    
     <string name="menu_search_shows_label">Search</string>
     <string name="menu_refresh_shows_label">Refresh</string>
     <string name="menu_delete_shows_label">Delete show</string>
     <string name="menu_update_shows_label">Update show</string>
     <string name="menu_sort_alphab_shows_label">Sort Alphabetically</string>
-    <string name="tracking_text_check_box">Tracking</string>
+    
     
     <string name="saved_to_file_toast">Saved information!</string>
     <string name="fetched_info_toast">Fetched information!</string>

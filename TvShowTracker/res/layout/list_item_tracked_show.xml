@@ -2,17 +2,22 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="4dp"
+    android:paddingTop="8dp"
+    android:paddingBottom="8dp"
+    android:paddingLeft="8dp"
+    android:paddingStart="8dp"
+    android:paddingRight="8dp"
+    android:paddingEnd="8dp"
     android:background="@drawable/background_activated"
     style="?android:listSeparatorTextViewStyle" >
     
-    <!-- SHOW IMAGE INFO <ImageView 
-        android:id="@+id/show_icon_imageView"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:contentDescription="@string/tv_show_name"
-        android:src="@drawable/prototype_tv_launcher_icon" /> -->
-   
+    <!-- SHOW IMAGE INFO-->
+	<ImageView
+	    android:id="@+id/show_icon_imageView"
+	    android:layout_width="150dp"
+	    android:layout_height="150dp"
+	    android:contentDescription="@string/tv_show_name"
+	    android:src="@drawable/no_poster" />
     
     <!-- SHOW NAME 
         android:layout_toRightOf="@+id/show_icon_imageView"
@@ -20,61 +25,116 @@
         android:layout_below="@+id/show_icon_imageView"-->
     <TextView
         android:id="@+id/tracked_show_name_text_view"
+        android:layout_toRightOf="@+id/show_icon_imageView"
+        android:layout_toEndOf="@+id/show_icon_imageView" 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/padding_value"
-        android:paddingTop="10dp"
+        android:paddingTop="@dimen/padding_value"
+        android:paddingBottom="@dimen/padding_value"
         android:paddingRight="@dimen/padding_value"
         android:text="@string/tv_show_name"
         android:textSize="@dimen/show_show_name_text_view_size"
-        android:textStyle="bold" />
+        android:textStyle="bold"/>
 
+    <!-- NETWORK INFO -->
+      <TextView
+        android:id="@+id/network_info_text_view"
+        android:layout_below="@id/tracked_show_name_text_view"
+        android:layout_toRightOf="@+id/show_icon_imageView"
+        android:layout_toEndOf="@+id/show_icon_imageView" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_value"
+        android:paddingRight="@dimen/padding_value"
+        android:paddingTop="@dimen/padding_value"
+        android:paddingBottom="@dimen/padding_value"
+        android:textSize="@dimen/show_season_text_view_size"
+        android:text="@string/show_network_label"
+        android:textColor="@color/light_blue"/>
+      
+    <!-- AIR DAY AND TIME INFO -->
+      <TextView
+        android:id="@+id/air_day_time_info_text_view"
+        android:layout_below="@id/network_info_text_view"
+        android:layout_toRightOf="@+id/show_icon_imageView"
+        android:layout_toEndOf="@+id/show_icon_imageView" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_value"
+        android:paddingRight="@dimen/padding_value"
+        android:paddingTop="@dimen/padding_value"
+        android:paddingBottom="@dimen/padding_value"
+        android:textSize="@dimen/show_season_text_view_size"
+        android:text="@string/show_air_day_time_text"
+        android:textColor="@color/light_blue"/>
+      
+    <!-- STATUS INFO -->
+       <TextView
+        android:id="@+id/show_status_text_view"
+        android:layout_below="@id/air_day_time_info_text_view"
+        android:layout_toRightOf="@+id/show_icon_imageView"
+        android:layout_toEndOf="@+id/show_icon_imageView" 
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/padding_value"
+        android:paddingRight="@dimen/padding_value"
+        android:paddingTop="@dimen/padding_value"
+        android:paddingBottom="@dimen/padding_value"
+        android:textSize="@dimen/show_season_text_view_size"
+        android:text="@string/show_status_text_title"
+        android:textColor="@color/light_blue"/>
+       
     <!-- SEASON INFO 
         android:layout_toRightOf="@+id/show_icon_imageView"
         android:layout_toEndOf="@+id/show_icon_imageView"-->
     <TextView
         android:id="@+id/tracked_show_season_text_view"
+        android:layout_below="@id/show_status_text_view"
+        android:layout_toRightOf="@+id/show_icon_imageView"
+        android:layout_toEndOf="@+id/show_icon_imageView" 
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tracked_show_name_text_view"
         android:paddingLeft="@dimen/padding_value"
         android:paddingRight="@dimen/padding_value"
         android:paddingTop="@dimen/padding_value"
+        android:paddingBottom="@dimen/padding_value"
         android:textSize="@dimen/show_season_text_view_size"
         android:text="@string/tv_show_season"
-        android:textColor="@color/show_subtitle_text_view_color"/>
+        android:textColor="@color/light_blue"/>
 
     <!-- EPISODE INFO -->
     <TextView
         android:id="@+id/tracked_show_episode_text_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tracked_show_name_text_view"
+        android:layout_below="@id/show_status_text_view"
         android:layout_toRightOf="@id/tracked_show_season_text_view"
         android:layout_toEndOf="@id/tracked_show_season_text_view"
         android:paddingLeft="@dimen/padding_value"
         android:paddingRight="@dimen/padding_value"
         android:paddingTop="@dimen/padding_value"
+        android:paddingBottom="@dimen/padding_value"
         android:textSize="@dimen/show_episode_text_view_size"
         android:text="@string/tv_show_episode_title"
-        android:textColor="@color/show_subtitle_text_view_color" />
+        android:textColor="@color/light_blue" />
 
     <!-- RELEASE DATE INFO -->
     <TextView
         android:id="@+id/tracked_show_release_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/tracked_show_name_text_view"
-        android:layout_toEndOf="@id/tracked_show_episode_text_view"
-        android:layout_toRightOf="@id/tracked_show_episode_text_view"
+        android:layout_below="@id/tracked_show_season_text_view"
+        android:layout_toEndOf="@id/show_icon_imageView"
+        android:layout_toRightOf="@id/show_icon_imageView"
         android:paddingLeft="@dimen/padding_value"
         android:paddingRight="@dimen/padding_value"
-        android:paddingTop="@dimen/padding_value"        
+        android:paddingTop="@dimen/padding_value"      
+        android:paddingBottom="@dimen/padding_value"  
         android:lines="1"
         android:ellipsize="end" 
         android:textSize="@dimen/show_airDate_text_view_size"
         android:text="@string/tv_show_release_date"
-        android:textColor="@color/show_subtitle_text_view_color" />
-
-
+        android:textColor="@color/light_blue" />
+    
 </RelativeLayout>

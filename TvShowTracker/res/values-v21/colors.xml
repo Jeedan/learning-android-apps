@@ -1,18 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="accent">#FF9D00</color>
-    
-    <!--  example: season + episode + release date info text under Show Name -->
+       <!--  example: season + episode + release date info text under Show Name -->
     <color name="light_blue">#368ABF</color>
     <!-- <color name="show_subtitle_text_view_color">#368ABF</color>-->
     
     <color name="white">#ffffff</color>
     <color name="black">#000000</color>
     <color name="light_gray">#666666</color>
-    
     <color name="medium_gray">#333333</color>
     <color name="dark_gray">#1a1a1a</color>
-    
     <color name="orange">#FF9D00</color>
-    
 </resources>

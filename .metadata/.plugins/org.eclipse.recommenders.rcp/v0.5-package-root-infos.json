@@ -1,5 +1,57 @@
 [
   {
+    "symbolicName": "android-support-v7-appcompat",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "aaa3ec7d7bfb3446a9190c5b1f601f1eb94745e7",
+    "jarFileModificationDate": "2014-10-09T22:11:55.454+03:00",
+    "location": "C:\\Users\\Jeedan\\Documents\\GitHub\\Android Workspaces\\appcompat_v7\\libs\\android-support-v7-appcompat.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "android-support-v4",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "efec67655f6db90757faa37201efcee2a9ec3507",
+    "jarFileModificationDate": "2014-10-09T22:11:55.440+03:00",
+    "location": "C:\\Users\\Jeedan\\Documents\\GitHub\\Android Workspaces\\appcompat_v7\\libs\\android-support-v4.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "appcompat_v7",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "263f364265e850c033d383948df6a94ae2b68e59",
+    "jarFileModificationDate": "2014-12-20T14:03:10.622+02:00",
+    "location": "C:\\Users\\Jeedan\\Documents\\GitHub\\Android Workspaces\\appcompat_v7\\bin\\appcompat_v7.jar",
+    "javaRuntime": false
+  },
+  {
+    "symbolicName": "android",
+    "version": {
+      "major": -1,
+      "minor": -1,
+      "micro": -1,
+      "qualifier": ""
+    },
+    "jarFileFingerprint": "9d58c29f33a93f486da30401118a4e45a7f208cb",
+    "jarFileModificationDate": "2014-10-09T22:04:10.525+03:00",
+    "location": "C:\\Android SDK\\adt-bundle-windows-x86_64-20131030\\sdk\\platforms\\android-19\\android.jar",
+    "javaRuntime": false
+  },
+  {
     "symbolicName": "android-support-v4",
     "version": {
       "major": -1,
@@ -26,19 +78,6 @@
     "javaRuntime": false
   },
   {
-    "symbolicName": "appcompat_v7",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "34fcbeca7ea0d9b87385460056104e6abf0790e3",
-    "jarFileModificationDate": "2014-12-09T12:22:35.818+02:00",
-    "location": "C:\\Users\\Jeedan\\Documents\\GitHub\\Android Workspaces\\appcompat_v7\\bin\\appcompat_v7.jar",
-    "javaRuntime": false
-  },
-  {
     "symbolicName": "android",
     "version": {
       "major": -1,
@@ -46,48 +85,9 @@
       "micro": -1,
       "qualifier": ""
     },
-    "jarFileFingerprint": "9d58c29f33a93f486da30401118a4e45a7f208cb",
-    "jarFileModificationDate": "2014-10-09T22:04:10.525+03:00",
-    "location": "C:\\Android SDK\\adt-bundle-windows-x86_64-20131030\\sdk\\platforms\\android-19\\android.jar",
-    "javaRuntime": false
-  },
-  {
-    "symbolicName": "android",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "5a0ffbfcbf497991d90727ba9c063bd1e5f2d218",
-    "jarFileModificationDate": "2014-10-23T23:09:56.162+03:00",
+    "jarFileFingerprint": "d77ef97c5800106b74180850a639bffe396a20ad",
+    "jarFileModificationDate": "2014-12-13T15:56:09.972+02:00",
     "location": "C:\\Android SDK\\adt-bundle-windows-x86_64-20131030\\sdk\\platforms\\android-21\\android.jar",
-    "javaRuntime": false
-  },
-  {
-    "symbolicName": "android-support-v7-appcompat",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "aaa3ec7d7bfb3446a9190c5b1f601f1eb94745e7",
-    "jarFileModificationDate": "2014-10-09T22:11:55.454+03:00",
-    "location": "C:\\Users\\Jeedan\\Documents\\GitHub\\Android Workspaces\\appcompat_v7\\libs\\android-support-v7-appcompat.jar",
-    "javaRuntime": false
-  },
-  {
-    "symbolicName": "android-support-v4",
-    "version": {
-      "major": -1,
-      "minor": -1,
-      "micro": -1,
-      "qualifier": ""
-    },
-    "jarFileFingerprint": "efec67655f6db90757faa37201efcee2a9ec3507",
-    "jarFileModificationDate": "2014-10-09T22:11:55.440+03:00",
-    "location": "C:\\Users\\Jeedan\\Documents\\GitHub\\Android Workspaces\\appcompat_v7\\libs\\android-support-v4.jar",
     "javaRuntime": false
   }
 ]
