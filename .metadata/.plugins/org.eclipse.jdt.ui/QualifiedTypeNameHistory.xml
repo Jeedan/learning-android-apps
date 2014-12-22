@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <qualifiedTypeNameHistroy>
-<fullyQualifiedTypeName name="java.util.Comparator"/>
-<fullyQualifiedTypeName name="android.view.ContextMenu"/>
-<fullyQualifiedTypeName name="android.view.ContextMenu.ContextMenuInfo"/>
 <fullyQualifiedTypeName name="android.support.v7.internal.widget.AdapterViewICS.AdapterContextMenuInfo"/>
 <fullyQualifiedTypeName name="android.widget.AdapterView.AdapterContextMenuInfo"/>
 <fullyQualifiedTypeName name="com.jeedan.android.tvshowtracker.MyShowsListFragment.TrackedAdapter"/>
@@ -54,10 +51,13 @@
 <fullyQualifiedTypeName name="java.io.File"/>
 <fullyQualifiedTypeName name="com.jeedan.android.tvshowtracker.FileIO"/>
 <fullyQualifiedTypeName name="java.io.FileInputStream"/>
-<fullyQualifiedTypeName name="com.jeedan.android.tvshowtracker.XMLSerializer"/>
 <fullyQualifiedTypeName name="android.widget.ImageView"/>
 <fullyQualifiedTypeName name="com.jeedan.android.tvshowtracker.MyShowsListFragment.DownloadBitmap"/>
 <fullyQualifiedTypeName name="android.widget.TextView"/>
 <fullyQualifiedTypeName name="com.jeedan.android.tvshowtracker.R.drawable"/>
 <fullyQualifiedTypeName name="android.graphics.Bitmap"/>
+<fullyQualifiedTypeName name="android.app.ProgressDialog"/>
+<fullyQualifiedTypeName name="com.jeedan.android.tvshowtracker.TVRageData"/>
+<fullyQualifiedTypeName name="com.jeedan.android.tvshowtracker.TVDBData"/>
+<fullyQualifiedTypeName name="com.jeedan.android.tvshowtracker.XMLSerializer"/>
 </qualifiedTypeNameHistroy>

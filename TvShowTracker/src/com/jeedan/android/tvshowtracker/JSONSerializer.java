@@ -27,29 +27,28 @@ import android.util.Log;
 
 public class JSONSerializer {
 	public static final String TAG = "TVShowJSONSerializer";
-	public static final String FILE_PATH = "/TVShowTracker";
-	
+
 	private Context mAppContext;
 	private String mFileName;
-	
+
 	private FileIO mFileIO;
-	
+
 	public JSONSerializer(String fileName){
 		mFileName = fileName;
 		mFileIO = new FileIO(mFileName);
 	}
-	
+
 	public JSONSerializer(Context context, String fileName){
 		mAppContext = context;
 		mFileName = fileName;
-		
+
 		mFileIO = new FileIO(mAppContext, mFileName);
 	}
-	
+
 	private byte[] getURLBytes(String urlSpec) throws IOException{
 		URL url = new URL(urlSpec);
 		HttpURLConnection connection = (HttpURLConnection)url.openConnection();
-		
+
 		try{
 			ByteArrayOutputStream out = new ByteArrayOutputStream();
 			InputStream in = connection.getInputStream();
@@ -61,9 +60,9 @@ public class JSONSerializer {
 			}
 			out.close();
 			return out.toByteArray();
-			
+
 		}catch(FileNotFoundException e){
-			 // Ignore this one; it happens when starting fresh
+			// Ignore this one; it happens when starting fresh
 			Log.d(TAG, "Error file not found", e);
 			return null;
 		}
@@ -71,57 +70,75 @@ public class JSONSerializer {
 			connection.disconnect();
 		}
 	}
-	
+
 	public String getURL(String urlSpec) throws IOException{
 		return new String(getURLBytes(urlSpec));
 	}
-	
+
 	public String parseJSONUrl(String showURL) throws JSONException, IOException{
 		String url = Uri.parse(showURL).buildUpon().toString();
 		String json = getURL(url);
-		
-	    return json;
-	}
-	
-	// adds episodes from the save file to the shows arraylist
-	public void addEpisodeJSONArray(String json, ArrayList<TVShow> shows) throws JSONException{
-		 // Parse the JSON using JSONTokener
-		 JSONArray array = (JSONArray) new JSONTokener(json).nextValue();
-		 // Build the array of crimes from JSONObjects
-		 for (int i = 0; i < array.length(); i++) {
-			 shows.add(new TVShow(array.getJSONObject(i)));
-		 }
+
+		return json;
 	}
 
+	// adds episodes from the save file to the shows arraylist
+	public void addEpisodeJSONArray(String json, ArrayList<TVShow> shows) throws JSONException{
+		// Parse the JSON using JSONTokener
+		JSONArray array = (JSONArray) new JSONTokener(json).nextValue();
+		// Build the array of crimes from JSONObjects
+		for (int i = 0; i < array.length(); i++) {
+			shows.add(new TVShow(array.getJSONObject(i)));
+		}
+	}
+	
+	// save to internal memory
+	public void saveInternal(ArrayList<JSONObject> array) throws JSONException, IOException {
+		// write the file to disk
+		Writer writer = null;
+		try {
+			OutputStream out = mAppContext.openFileOutput(mFileName, Context.MODE_PRIVATE);
+			writer = new OutputStreamWriter(out);
+			writer.write(array.toString());
+		} finally {
+			if (writer != null)
+				writer.close();
+		}
+	}
+	
+	// save to externa;
 	public void saveShowsToFile(ArrayList<TVShow> shows) throws IOException, JSONException{
 		// build a json object
 		ArrayList<JSONObject> array = new ArrayList<JSONObject>();
 
 		//Log.d(TAG, "shows size " + shows.size());
-		//JSONArray array = new JSONArray();
 		for(TVShow s : shows){
 			//Log.d(TAG, "" + s.toJSON());
 			array.add(s.toJSON());
 		}
 
 		//Log.d(TAG, "array size " + array.size());
-		mFileIO.makeDirectory();
-		
-		Writer writer = null;
-		try{
-			//Log.d(TAG, getFile().toString());
-			//String fileName = getFile().toString().substring(34);
-			//Log.d(TAG, fileName);
-			OutputStream out = new FileOutputStream(mFileIO.getFile().toString());
-			writer = new OutputStreamWriter(out);
-			writer.write(array.toString());
-		}finally{
-			if(writer != null){
-				writer.close();
+		if(mFileIO.isExternalStorageWriteable()){
+			mFileIO.makeDirectory();
+			Writer writer = null;
+			try{
+				//Log.d(TAG, getFile().toString());
+				//String fileName = getFile().toString().substring(34);
+				//Log.d(TAG, fileName);
+				OutputStream out = new FileOutputStream(mFileIO.getFile().toString());
+				writer = new OutputStreamWriter(out);
+				writer.write(array.toString());
+			}finally{
+				if(writer != null){
+					writer.close();
+				}
 			}
+		}else {
+			// save internal
+			saveInternal(array);
 		}
 	}
-		
+	
 	// load JSON shows from file
 	// using this 1 to load our tracked shows from file on start up
 	public ArrayList<TVShow> loadShowsFromFile() throws JSONException, IOException{
@@ -132,12 +149,14 @@ public class JSONSerializer {
 			if(mFileIO.isExternalStorageWriteable()){
 				in = new FileInputStream(mFileIO.getFile().toString());
 				Log.d(TAG, "opening file " + mFileIO.getFile().toString());
-				reader = new BufferedReader(new InputStreamReader(in));
+				
 			} else { 
-				Log.d(TAG, "No external storage found");
-				return null;
+				//Log.d(TAG, "No external storage found");
+				Log.d(TAG, "Using internal storage");
+				in = mAppContext.openFileInput(mFileName);
 			}
-			
+
+			reader = new BufferedReader(new InputStreamReader(in));
 			StringBuilder jsonString = new StringBuilder();
 			String line = null;
 			while((line = reader.readLine()) != null){
@@ -147,11 +166,10 @@ public class JSONSerializer {
 			//parse the Json now that we have read and stored the data			
 			//Log.d(TAG, "file contents " + jsonString.toString());
 			//String epInfo = jsonString.toString().substring(1, jsonString.length()-1);
-			//Log.d(TAG, "epInfo " + epInfo);
 			addEpisodeJSONArray(jsonString.toString(), shows);
 		}
 		catch(FileNotFoundException e){
-			 // Ignore this one; it happens when starting fresh
+			// Ignore this one; it happens when starting fresh
 			Log.d(TAG, "Error file not found", e);
 		}
 		finally{
@@ -173,7 +191,7 @@ public class JSONSerializer {
  * 	public void loadAllShowEpisodes(String json, ArrayList<TVShow> shows) throws JSONException{
 	    JSONObject objects = (JSONObject)new JSONTokener(json).nextValue();
 		//Log.d(TAG, objects.toString());
-		
+
 		ArrayList<String> seasonArray = new ArrayList<String>();
 		JSONArray testArr = objects.names();
 	    // loop through the testArr strings backwards becuse it adds them in reverse... don't know why
@@ -190,20 +208,20 @@ public class JSONSerializer {
 			}  
 	    }
 	}
-	
-		
+
+
 	// got all episodes for a show from epiguides
 	public ArrayList<TVShow> fetchShowAllEpisodes(String showURL) throws IOException, JSONException{
 		ArrayList<TVShow> shows = new ArrayList<TVShow>();
 		try{
 		    loadAllShowEpisodes(parseJSONUrl(showURL), shows);
 		    //loadEpisodeLast(objects, shows);
-		    
+
 		}catch(IOException ioe){
 			Log.e(TAG, "Failed to fetch items", ioe);
 			shows = new ArrayList<TVShow>();
 		}
 		return shows;
 	}
-	
-	*/
+
+ */

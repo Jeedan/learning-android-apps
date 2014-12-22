@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="4dp"
+    android:padding="@dimen/bigger_pad_value"
     style="?android:listSeparatorTextViewStyle" >
 
     <TextView
@@ -24,7 +24,8 @@
         android:paddingRight="@dimen/padding_value"
         android:paddingTop="@dimen/padding_value"
         android:textSize="@dimen/show_season_text_view_size"
-        android:text="@string/tv_show_season" />
+        android:text="@string/tv_show_season"
+        android:textColor="@color/light_blue" />
 
     <TextView
         android:id="@+id/tracked_show_episode_text_view"
@@ -37,5 +38,6 @@
         android:paddingRight="@dimen/padding_value"
         android:paddingTop="@dimen/padding_value"
         android:textSize="@dimen/show_episode_text_view_size"
-        android:text="@string/tv_show_episode_title" />
+        android:text="@string/tv_show_episode_title"
+        android:textColor="@color/light_blue" />
 </RelativeLayout>

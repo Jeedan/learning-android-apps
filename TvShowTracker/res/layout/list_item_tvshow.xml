@@ -2,8 +2,12 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:paddingBottom="8dp"
-    android:paddingTop="8dp"
+    android:paddingBottom="@dimen/huge_pad_value"
+    android:paddingTop="@dimen/huge_pad_value"
+    android:paddingRight="@dimen/bigger_pad_value"
+    android:paddingEnd="@dimen/huge_pad_value"
+    android:paddingLeft="@dimen/huge_pad_value"
+    android:paddingStart="@dimen/huge_pad_value"
     style="?android:listSeparatorTextViewStyle" >
     
 	<ImageView

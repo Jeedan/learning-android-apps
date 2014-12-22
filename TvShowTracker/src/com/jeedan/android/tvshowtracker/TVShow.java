@@ -180,14 +180,9 @@ public class TVShow {
 		}
 		
 		JSONObject episode = new JSONObject();
-		episode.put(JSON_EPISODE, mEpisodeObject);	
-		episode.put(JSON_SEASON, mSeason);
-		episode.put(JSON_RELEASE_DATE, mReleaseDate);
-		episode.put(JSON_TITLE, mEpisodeTitle);
-		episode.put(JSON_NUMBER, mEpisodeNumber);		
-
 		JSONObject show = new JSONObject();
 		episode.put(JSON_SHOW, show);
+	
 		show.put(JSON_TITLE, mShowName);
 		show.put(JSON_UPDATED_INFO, mUpdatedInformation);
 		show.put(JSON_TVRAGE_ID, mTVRage_id);
@@ -197,9 +192,12 @@ public class TVShow {
 		show.put(JSON_TV_NETWORK, mNetwork);
 		show.put(JSON_TVDB_BANNER, mBannerURL);
 		show.put(JSON_TVDB_POSTER, mPosterURL);
-
-		//TODO make banners an array 
-		// and store posters + fanart + banner in it
+		
+		episode.put(JSON_EPISODE, mEpisodeObject);	
+		episode.put(JSON_SEASON, mSeason);
+		episode.put(JSON_NUMBER, mEpisodeNumber);		
+		episode.put(JSON_TITLE, mEpisodeTitle);
+		episode.put(JSON_RELEASE_DATE, mReleaseDate);
 
 		// next season
 		// next ep

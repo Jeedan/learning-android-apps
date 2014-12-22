@@ -2,22 +2,24 @@
 <section name="Workbench">
 	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
 		<item value="false" key="isRegEx"/>
-		<item value="Log" key="selection"/>
+		<item value="mSeries" key="selection"/>
 		<item value="false" key="casesensitive"/>
 		<item value="false" key="incremental"/>
 		<item value="true" key="wrap"/>
 		<item value="false" key="wholeword"/>
 		<list key="findhistory">
+			<item value="mSeries"/>
+			<item value="tvRage."/>
+			<item value="parseItems"/>
+			<item value="tvDB."/>
+			<item value="mContext"/>
 			<item value="ta"/>
 			<item value="Log"/>
 			<item value="Log.d"/>
-			<item value="mApp"/>
-			<item value="ShowDataBase.getInstance(getActivity())"/>
-			<item value=".getInstance(getActivity())"/>
-			<item value="mShowDB"/>
-			<item value="ShowDatabase"/>
 		</list>
 		<list key="replacehistory">
+			<item value=" "/>
+			<item value=""/>
 			<item value="mShowDB"/>
 		</list>
 	</section>

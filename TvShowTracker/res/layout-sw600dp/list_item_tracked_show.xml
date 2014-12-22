@@ -7,11 +7,10 @@
     style="?android:listSeparatorTextViewStyle" >
     
     <!-- SHOW IMAGE INFO-->
-
 	<ImageView
 	    android:id="@+id/show_icon_imageView"
 	    android:layout_width="150dp"
-	    android:layout_height="100dp"
+	    android:layout_height="150dp"
 	    android:contentDescription="@string/tv_show_name"
 	    android:src="@drawable/no_poster" />
     
