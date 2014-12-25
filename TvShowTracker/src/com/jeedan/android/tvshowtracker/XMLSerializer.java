@@ -285,23 +285,26 @@ public class XMLSerializer {
 			File f = serializer.getFile();
 			Log.d(TAG, "saving image to file: " + f.toString());
 
-			try {
-
-				OutputStream out = new FileOutputStream(f.toString());
-				// saving the Bitmap to a file compressed as a JPEG
-				// with 85% compression rate
-				bm.compress(Bitmap.CompressFormat.JPEG, 85, out);
-				Log.d(TAG, "saving image to file: " + imgName);
-
-				out.flush();
-				out.close(); // do not forget to close the stream	
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				Log.d(TAG, "ERROR CANNOT FIND file: " + imgName);
-			} catch (IOException e) {
-
-				Log.d(TAG, "ERROR SAVING IMAGE TO FILE: " + imgName);
-				// TODO Auto-generated catch block
+			if(!f.exists()){
+				try {
+					
+					OutputStream out = new FileOutputStream(f.toString());
+					// saving the Bitmap to a file compressed as a JPEG
+					// with 85% compression rate
+					bm.compress(Bitmap.CompressFormat.JPEG, 85, out);
+					Log.d(TAG, "saving image to file: " + imgName);
+					
+					out.flush();
+					out.close(); // do not forget to close the stream	
+				} catch (FileNotFoundException e) {
+					Log.d(TAG, "ERROR CANNOT FIND file: " + imgName);
+				} catch (IOException e) {
+					
+					Log.d(TAG, "ERROR SAVING IMAGE TO FILE: " + imgName);
+				}
+			}else
+			{
+				//Log.d(TAG, "file exists: " + imgName);
 			}
 		}
 	}

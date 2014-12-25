@@ -195,7 +195,6 @@ public class CalendarShowsListFragment extends ListFragment {
 			
 			((CalendarShowAddapter) getListAdapter()).notifyDataSetChanged();
 		} catch (ParseException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -206,7 +205,6 @@ public class CalendarShowsListFragment extends ListFragment {
 
 		public CalendarShowAddapter(ArrayList<TVShow> tvShows) {
 			super(getActivity(), 0, tvShows);
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override

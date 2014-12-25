@@ -128,12 +128,6 @@ public class MyShowsListFragment extends ListFragment {
 	public void onPause() {
 		super.onPause();
 		mShowDB.saveTrackedShows(mTrackedShows);
-		XMLSerializer xmlSave = new XMLSerializer();
-		
-		for(int i = 0; i < mTrackedShows.size(); i++){
-			
-			xmlSave.saveBitmapToFile(mTrackedShows.get(i).getBanner(),mTrackedShows.get(i).getPosterURL());
-		}
 		Log.d(TAG, "onPause");
 		// Toast.makeText(getActivity(),
 		// R.string.saved_to_file_toast,Toast.LENGTH_SHORT).show();
@@ -484,10 +478,6 @@ public class MyShowsListFragment extends ListFragment {
 					Log.d(TAG, "DownloadBitmap doInBackground: " + show.getShowName() + " " + show.getPosterURL());
 				}
 			}
-			
-			if(gotImage){					
-			//	new XMLSerializer().saveBitmapToFile(show.getBanner(),show.getPosterURL());
-			}
 
 			return null;
 		}
@@ -498,7 +488,9 @@ public class MyShowsListFragment extends ListFragment {
 			if(show.getBanner() != null){
 				showImage.setImageBitmap(show.getBanner());
 			}
-
+			
+			new XMLSerializer().saveBitmapToFile(show.getBanner(),show.getPosterURL());
+			
 			mAdapter.notifyDataSetChanged();
 		}
 	}

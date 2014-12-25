@@ -19,7 +19,10 @@ public class UtilsDate {
     /*
      * CREATE A UTILITIES DATE CLASS
      * 
-     * GET TODAY's DATE get day get hour get minute
+     * GET TODAY's DATE 
+     * get day 
+     * get hour
+     *  get minute
      * 
      * convert timezone // luxury Compare 2 dates based on string
      */

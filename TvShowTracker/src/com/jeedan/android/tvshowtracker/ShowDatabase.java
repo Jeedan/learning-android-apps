@@ -48,8 +48,6 @@ public class ShowDatabase {
 
 			@Override
 			public int compare(TVShow lhs, TVShow rhs) {
-				// TODO Auto-generated method stub
-
 				return lhs.getShowName().compareTo(rhs.getShowName());
 			}
 
@@ -76,10 +74,8 @@ public class ShowDatabase {
 		try {
 			mSerializer.saveShowsToFile(shows);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (JSONException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 
